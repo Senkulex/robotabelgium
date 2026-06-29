@@ -5,237 +5,128 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robota Belgium — Легальне працевлаштування в Бельгії</title>
 <meta name="description" content="Професійний рекрутинг та супровід для кваліфікованих спеціалістів у Бельгії.">
-<meta property="og:title" content="Robota Belgium — Легальне працевлаштування в Бельгії">
-<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --dark:#0a0a0a;
-  --dark2:#141414;
-  --dark3:#1e1e1e;
-  --dark4:#2a2a2a;
-  --white:#ffffff;
-  --gray:#999;
-  --light-gray:#ccc;
-  --accent:#e8c547;
-  --accent2:#d4a843;
-  --blue-work:#3a6ea5;
-  --orange-work:#e87830;
+  --bg:#4d4d4d;--bg-dark:#3a3a3a;--bg-darker:#333;--bg-footer:#2e2e2e;
+  --green:#5a7a3a;--green-light:#6b8e4e;--green-hover:#7da05a;
+  --white:#fff;--text:#e8e8e8;--text-dim:#bbb;--text-dark:#999;
+  --tg:#28a8ea;--wa:#25d366;--fb:#1877f2;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Open Sans',sans-serif;color:var(--white);line-height:1.6;background:var(--dark);overflow-x:hidden}
-h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px}
+body{font-family:'Open Sans',sans-serif;color:var(--text);line-height:1.7;background:var(--bg)}
+h1,h2,.brand{font-family:'DM Serif Display',serif}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-
-/* NAV */
-.nav{background:var(--dark);border-bottom:1px solid #222;position:sticky;top:0;z-index:100}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
-.nav-brand{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--white)}
-.nav-brand span{color:var(--accent)}
-.nav-right{display:flex;align-items:center;gap:8px}
-.nav-social{display:flex;gap:10px;margin-right:16px}
-.nav-social a{width:32px;height:32px;border-radius:50%;background:#222;display:flex;align-items:center;justify-content:center;font-size:14px;transition:background .2s}
-.nav-social a:hover{background:var(--accent);color:var(--dark)}
-.lang-btn{padding:4px 10px;border:1px solid #333;border-radius:4px;background:transparent;color:var(--gray);cursor:pointer;font-size:12px;font-family:'Oswald',sans-serif;letter-spacing:1px;transition:all .2s}
-.lang-btn.active{background:var(--accent);color:var(--dark);border-color:var(--accent);font-weight:600}
-.lang-btn:hover{border-color:var(--accent)}
-.menu-btn{display:none;background:none;border:none;color:var(--white);font-size:24px;cursor:pointer;margin-left:8px}
-.nav-links{display:flex;gap:0;border-top:1px solid #1a1a1a}
-.nav-link{color:var(--gray);font-size:12px;padding:10px 14px;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1.5px;transition:color .2s;cursor:pointer;border:none;background:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+.nav{background:var(--bg-dark);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-size:26px;font-weight:400;color:var(--white);letter-spacing:.5px}
+.nav-right{display:flex;align-items:center;gap:10px}
+.social-icons{display:flex;gap:6px}
+.social-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);transition:transform .2s}
+.social-icon:hover{transform:scale(1.12)}
+.social-icon.tg{background:var(--tg)}.social-icon.fb{background:var(--fb)}
+.social-icon.ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.social-icon.tt{background:#111}.social-icon.vb{background:#7360f2}
+.lang-bar{display:flex;gap:3px}
+.lang-btn{padding:4px 9px;border-radius:4px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--text-dark);cursor:pointer;font-size:12px;font-family:'Open Sans',sans-serif;transition:all .2s}
+.lang-btn.active{background:var(--green);color:var(--white);border-color:var(--green)}
+.menu-btn{display:none;background:none;border:none;color:var(--white);font-size:24px;cursor:pointer;margin-left:6px}
+.nav-links{display:flex;gap:0;background:var(--bg-darker)}
+.nav-link{color:var(--text-dim);font-size:13px;padding:10px 14px;transition:color .2s;cursor:pointer;border:none;background:none;font-family:'Open Sans',sans-serif}
 .nav-link:hover{color:var(--white)}
-
-/* HERO */
-.hero{
-  position:relative;min-height:85vh;display:flex;align-items:center;
-  background:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80') center/cover no-repeat;
-}
-.hero::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.65)}
-.hero-content{position:relative;z-index:2;padding:80px 24px;width:100%}
-.hero h1{
-  font-size:clamp(36px,7vw,72px);font-weight:700;line-height:1.05;
-  max-width:700px;margin-bottom:24px;
-  text-shadow:2px 2px 0 rgba(0,0,0,.5),4px 4px 0 rgba(0,0,0,.3);
-}
-.hero h1 .gold{color:var(--accent)}
-.hero-sub{font-size:18px;color:var(--light-gray);max-width:500px;margin-bottom:36px}
-.btn{
-  display:inline-block;padding:14px 36px;font-family:'Oswald',sans-serif;
-  font-size:15px;text-transform:uppercase;letter-spacing:2px;font-weight:600;
-  cursor:pointer;transition:all .25s;border:none;
-}
-.btn-accent{background:var(--accent);color:var(--dark)}
-.btn-accent:hover{background:var(--white);transform:translateY(-2px)}
-.btn-outline{background:transparent;border:2px solid var(--white);color:var(--white)}
-.btn-outline:hover{background:var(--white);color:var(--dark)}
-
-/* PHOTO GRID (original Wix style) */
-.photo-strip{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:4px;
-  padding:4px 0;background:var(--dark);
-}
-.photo-strip img{width:100%;height:180px;object-fit:cover;filter:brightness(.8);transition:filter .3s}
-.photo-strip img:hover{filter:brightness(1)}
-
-/* SECTIONS */
-.section{padding:80px 24px}
-.section-dark{background:var(--dark2)}
-.section-darker{background:var(--dark)}
-.section-photo{
-  position:relative;
-  background-attachment:fixed;background-size:cover;background-position:center;
-}
-.section-photo::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.7)}
-.section-photo .wrap{position:relative;z-index:2}
-.section-title{
-  font-size:clamp(28px,4vw,40px);font-weight:700;margin-bottom:12px;
-  text-shadow:1px 1px 0 rgba(0,0,0,.4);
-}
-.section-title .gold{color:var(--accent)}
-.section-line{width:60px;height:3px;background:var(--accent);margin-bottom:36px}
-.section-text{font-size:16px;color:var(--light-gray);max-width:700px;line-height:1.75}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:40px}
-.about-img{width:100%;height:360px;object-fit:cover;filter:brightness(.85)}
-.about-cards{display:flex;flex-direction:column;gap:16px}
-.about-card{padding:20px 24px;background:var(--dark3);border-left:3px solid var(--accent);transition:transform .2s}
-.about-card:hover{transform:translateX(6px)}
-.about-card h3{font-size:16px;margin-bottom:4px;color:var(--accent);font-weight:600}
-.about-card p{font-size:14px;color:var(--gray);line-height:1.6}
-
-/* SERVICES */
-.service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:3px;margin-top:40px}
-.service-card{
-  background:var(--dark3);padding:36px 28px;position:relative;overflow:hidden;
-  transition:background .3s;
-}
-.service-card::before{
-  content:'';position:absolute;top:0;left:0;width:100%;height:3px;
-  background:var(--accent);transform:scaleX(0);transform-origin:left;
-  transition:transform .3s;
-}
-.service-card:hover{background:var(--dark4)}
-.service-card:hover::before{transform:scaleX(1)}
-.service-card .icon{font-size:36px;margin-bottom:16px}
-.service-card h3{font-size:18px;margin-bottom:8px;color:var(--white)}
-.service-card p{font-size:14px;color:var(--gray);line-height:1.7}
-
-/* PROCESS */
-.process-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px}
-.step{text-align:center;padding:32px 20px;border-right:1px solid #222;position:relative}
-.step:last-child{border-right:none}
-.step-num{
-  font-family:'Oswald',sans-serif;font-size:48px;font-weight:700;
-  color:var(--accent);line-height:1;margin-bottom:12px;
-  text-shadow:2px 2px 0 rgba(0,0,0,.4);
-}
-.step h3{font-size:15px;margin-bottom:6px;color:var(--white)}
-.step p{font-size:13px;color:var(--gray);line-height:1.6}
-
-/* SECTORS */
-.sector-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
-.sector-tag{
-  padding:10px 20px;background:var(--dark3);border:1px solid #333;
-  font-family:'Oswald',sans-serif;font-size:14px;text-transform:uppercase;
-  letter-spacing:1px;color:var(--light-gray);transition:all .2s;cursor:default;
-}
-.sector-tag:hover{border-color:var(--accent);color:var(--accent)}
-
-/* FAQ */
-.faq-list{max-width:720px;margin-top:36px}
-.faq-item{border-bottom:1px solid #222}
-.faq-q{
-  background:none;border:none;cursor:pointer;width:100%;text-align:left;
-  padding:20px 0;font-size:16px;font-weight:600;color:var(--white);
-  display:flex;justify-content:space-between;align-items:center;
-  font-family:'Open Sans',sans-serif;transition:color .2s;
-}
-.faq-q:hover{color:var(--accent)}
-.faq-q .tgl{color:var(--accent);font-size:22px;transition:transform .3s;font-family:monospace}
+.hero{display:grid;grid-template-columns:340px 1fr;min-height:480px}
+.hero-text{background:var(--bg-dark);padding:48px 36px;display:flex;flex-direction:column;justify-content:center}
+.hero-text h1{font-size:36px;font-weight:400;line-height:1.2;margin-bottom:28px;color:var(--white)}
+.btn-pill{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:50px;font-size:15px;font-family:'Open Sans',sans-serif;font-weight:600;cursor:pointer;transition:all .25s;border:2px solid transparent}
+.btn-green{background:var(--green);color:var(--white);border-color:var(--green)}
+.btn-green:hover{background:var(--green-hover);border-color:var(--green-hover)}
+.btn-outline{background:transparent;border-color:var(--white);color:var(--white)}
+.btn-outline:hover{background:rgba(255,255,255,.1)}
+.btn-dark{background:rgba(0,0,0,.5);color:var(--white);border-color:rgba(255,255,255,.3)}
+.btn-dark:hover{background:rgba(0,0,0,.7)}
+.hero-photos{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px}
+.hero-photos img{width:100%;height:100%;object-fit:cover;min-height:240px}
+.section{padding:64px 28px}
+.section-gray{background:var(--bg)}.section-dark{background:var(--bg-dark)}
+.section-title{font-size:28px;font-weight:400;margin-bottom:10px;color:var(--white)}
+.section-line{width:50px;height:3px;background:var(--green);margin-bottom:32px;border-radius:2px}
+.body-text{font-size:15px;color:var(--text);max-width:750px;text-align:justify;line-height:1.8}
+.about-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:32px}
+.about-card{padding:24px;background:var(--bg-darker);border-left:3px solid var(--green);transition:transform .2s}
+.about-card:hover{transform:translateX(4px)}
+.about-card h3{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--green-light)}
+.about-card p{font-size:14px;color:var(--text-dim);line-height:1.65}
+.service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:3px;margin-top:32px}
+.service-card{background:var(--bg-darker);padding:32px 24px;transition:background .2s}
+.service-card:hover{background:#444}
+.service-card .icon{font-size:32px;margin-bottom:14px}
+.service-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--white)}
+.service-card p{font-size:14px;color:var(--text-dim);line-height:1.7}
+.process-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:32px}
+.step{text-align:center;padding:28px 16px;border-right:1px solid rgba(255,255,255,.1)}
+.step:last-child{border:none}
+.step-num{font-family:'DM Serif Display',serif;font-size:44px;color:var(--green-light);margin-bottom:10px}
+.step h3{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--white);text-transform:uppercase;letter-spacing:1px}
+.step p{font-size:13px;color:var(--text-dim);line-height:1.6}
+.sector-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.sector-tag{padding:10px 20px;background:var(--bg-darker);border:1px solid rgba(255,255,255,.08);border-radius:24px;font-size:14px;color:var(--text-dim);transition:all .2s;cursor:default}
+.sector-tag:hover{border-color:var(--green);color:var(--green-light)}
+.faq-list{max-width:700px;margin-top:28px}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.08)}
+.faq-q{background:none;border:none;cursor:pointer;width:100%;text-align:left;padding:18px 0;font-size:15px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center;font-family:'Open Sans',sans-serif;transition:color .2s}
+.faq-q:hover{color:var(--green-light)}
+.faq-q .tgl{color:var(--green-light);font-size:20px;transition:transform .3s;font-family:monospace;flex-shrink:0;margin-left:12px}
 .faq-q.open .tgl{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;font-size:14px;color:var(--gray);line-height:1.75;padding:0}
-.faq-a.open{max-height:400px;padding:0 0 20px}
-
-/* LEGAL */
-.legal-box{background:var(--dark3);border:1px solid #222;padding:32px;max-width:500px;margin-top:32px}
-.legal-row{margin-bottom:14px}
-.legal-label{font-family:'Oswald',sans-serif;font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:2px;margin-bottom:2px}
-.legal-val{font-size:15px;color:var(--orange-work);font-style:italic}
-.legal-note{font-size:13px;color:var(--gray);margin-top:18px;padding-top:18px;border-top:1px solid #222}
-
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:14px;color:var(--text-dim);line-height:1.75}
+.faq-a.open{max-height:400px;padding-bottom:16px}
 /* CONTACT */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px}
-.contact-grid h3{font-size:20px;margin-bottom:20px;color:var(--accent)}
-.form-stack{display:flex;flex-direction:column;gap:10px}
-.form-input{
-  padding:14px 18px;border:1px solid #333;background:var(--dark3);
-  color:var(--white);font-size:14px;font-family:'Open Sans',sans-serif;
-  outline:none;transition:border-color .2s;
+.contact-box{max-width:600px;margin:0 auto;text-align:center}
+.form-big-btn{
+  display:inline-flex;align-items:center;gap:12px;padding:20px 48px;border-radius:50px;
+  background:var(--green);color:var(--white);font-size:18px;font-weight:700;
+  font-family:'Open Sans',sans-serif;transition:all .25s;border:none;cursor:pointer;
+  box-shadow:0 4px 20px rgba(90,122,58,.35);
 }
-.form-input:focus{border-color:var(--accent)}
-.form-input::placeholder{color:#555}
-textarea.form-input{resize:vertical;min-height:80px}
-.form-success{background:var(--dark3);border:1px solid var(--accent);padding:28px;text-align:center;color:var(--accent);font-size:15px;font-weight:600;display:none}
-.direct-links{display:flex;flex-direction:column;gap:12px}
-.direct-link{
-  display:flex;align-items:center;gap:14px;padding:16px 20px;
-  background:var(--dark3);border:1px solid #222;color:var(--white);
-  transition:all .2s;
+.form-big-btn:hover{background:var(--green-hover);transform:translateY(-2px);box-shadow:0 6px 28px rgba(90,122,58,.45)}
+.form-big-btn svg{flex-shrink:0}
+.social-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:32px}
+.social-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:28px;
+  color:var(--white);font-size:14px;font-weight:600;transition:transform .2s,opacity .2s;
 }
-.direct-link:hover{border-color:var(--accent);transform:translateX(4px)}
-.direct-link .dl-icon{font-size:24px}
-.direct-link .dl-label{font-family:'Oswald',sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:1px}
-.direct-link .dl-sub{font-size:13px;color:var(--gray)}
-
-/* CTA BANNER */
-.cta-banner{
-  padding:60px 24px;text-align:center;
-  background:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80') center/cover no-repeat;
-  position:relative;
-}
-.cta-banner::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.7)}
-.cta-banner .wrap{position:relative;z-index:2}
-.cta-banner h2{font-size:clamp(24px,4vw,36px);margin-bottom:8px}
-.cta-banner p{color:var(--gray);margin-bottom:28px;font-size:16px}
-
-/* FOOTER */
-.footer{background:var(--dark);border-top:1px solid #1a1a1a;padding:28px 24px;text-align:center}
-.footer-top{display:flex;justify-content:center;gap:24px;margin-bottom:12px}
-.footer-top span{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;cursor:pointer;font-family:'Oswald',sans-serif}
-.footer-top span:hover{color:var(--accent)}
-.footer-copy{font-size:12px;color:#444}
-.footer-disc{font-size:11px;color:#333;margin-top:8px;max-width:600px;margin-left:auto;margin-right:auto}
-
-/* SCROLLREVEAL */
-.sr{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.social-btn:hover{transform:translateY(-2px);opacity:.88}
+.social-btn svg{flex-shrink:0}
+.cta-section{background:var(--bg-dark);padding:56px 28px;text-align:center}
+.cta-section h2{font-size:28px;margin-bottom:8px;color:var(--white);font-weight:400}
+.cta-section p{color:var(--text-dim);margin-bottom:24px}
+.footer{background:var(--bg-footer);padding:24px 28px;text-align:center;border-top:1px solid rgba(255,255,255,.04)}
+.footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:10px}
+.footer-links span{font-size:12px;color:var(--text-dark);cursor:pointer;transition:color .2s}
+.footer-links span:hover{color:var(--green-light)}
+.footer-copy{font-size:13px;color:var(--text-dark)}
+.footer-disc{font-size:11px;color:#555;margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto}
+.sr{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
 .sr.vis{opacity:1;transform:translateY(0)}
-.sr-d1{transition-delay:.1s}.sr-d2{transition-delay:.2s}.sr-d3{transition-delay:.3s}.sr-d4{transition-delay:.35s}
-
-/* MOBILE */
+.sr-d1{transition-delay:.1s}.sr-d2{transition-delay:.2s}.sr-d3{transition-delay:.25s}.sr-d4{transition-delay:.3s}
 @media(max-width:768px){
   .menu-btn{display:block}
-  .nav-links{display:none;flex-direction:column;padding:0}
-  .nav-links.open{display:flex}
-  .hero{min-height:70vh}
-  .hero h1{font-size:clamp(28px,8vw,48px)}
-  .photo-strip{grid-template-columns:repeat(2,1fr)}
-  .about-grid{grid-template-columns:1fr;gap:24px}
-  .about-img{height:220px}
-  .process-row{grid-template-columns:1fr 1fr;gap:0}
-  .step{border-right:none;border-bottom:1px solid #222}
-  .contact-grid{grid-template-columns:1fr;gap:28px}
-  .section{padding:56px 24px}
+  .nav-links{display:none;flex-direction:column}.nav-links.open{display:flex}
+  .hero{grid-template-columns:1fr}
+  .hero-photos{grid-template-columns:1fr 1fr;max-height:300px;overflow:hidden}
+  .hero-photos img{min-height:150px}
+  .process-row{grid-template-columns:1fr 1fr}
+  .step{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
+  .section{padding:48px 20px}
 }
 @media(max-width:480px){
-  .photo-strip{grid-template-columns:1fr 1fr}
+  .hero-photos{grid-template-columns:1fr}
   .process-row{grid-template-columns:1fr}
-  .nav-social{display:none}
+  .social-icons{display:none}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -244,16 +135,21 @@ textarea.form-input{resize:vertical;min-height:80px}
 <nav class="nav">
 <div class="wrap">
   <div class="nav-inner">
-    <div class="nav-brand">Робота <span>Бельгія</span></div>
+    <div class="brand" data-i18n="brand">Робота Бельгія</div>
     <div class="nav-right">
-      <div class="nav-social">
-        <a href="https://t.me/robotabelgium_info" target="_blank" rel="noopener" title="Telegram">✈</a>
-        <a href="https://www.facebook.com/robotaBelgium/" target="_blank" rel="noopener" title="Facebook">f</a>
+      <div class="social-icons">
+        <a class="social-icon tg" href="https://t.me/robotabelgium_info" target="_blank" title="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.013 12.013 0 0 0 11.944 0Zm4.962 7.166c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.064-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635Z"/></svg></a>
+        <a class="social-icon ig" href="https://www.instagram.com/robotabelgium.info" target="_blank" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+        <a class="social-icon tt" href="https://www.tiktok.com/@robotabelgium.info" target="_blank" title="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.75a8.18 8.18 0 0 0 4.76 1.52V6.84a4.84 4.84 0 0 1-1-.15z"/></svg></a>
+        <a class="social-icon fb" href="https://www.facebook.com/profile.php?id=61558649014040" target="_blank" title="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a class="social-icon vb" href="https://invite.viber.com/?g2=AQBhQtCWPy%2FjW1NmmbFtHEdIc6hRrpL2D1UPXZQu%2BWHVTLnp8z5r9j4Aru%2BMnHLq&lang=en" target="_blank" title="Viber"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M11.4 0C9.473.028 5.333.344 3.02 2.467 1.302 4.187.541 6.825.453 10.096c-.088 3.27-.198 9.401 5.751 11.083h.005l-.004 2.533s-.039.981.63 1.181c.752.227 1.163-.455 1.87-1.228l1.283-1.462c3.54.299 6.263-.385 6.575-.491.717-.244 4.773-.754 5.435-6.148.682-5.56-.321-9.065-2.121-10.65-.538-.488-2.664-2.03-7.398-2.26 0 0-.348-.025-.876-.023z"/></svg></a>
       </div>
-      <button class="lang-btn active" onclick="setLang('uk')">UA</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('nl')">NL</button>
-      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <div class="lang-bar">
+        <button class="lang-btn active" onclick="setLang('uk')">UA</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('nl')">NL</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
       <button class="menu-btn" onclick="toggleMenu()">☰</button>
     </div>
   </div>
@@ -270,46 +166,38 @@ textarea.form-input{resize:vertical;min-height:80px}
 
 <!-- HERO -->
 <section class="hero" id="home">
-<div class="hero-content wrap">
-  <h1>
-    <span data-i18n="hero.line1">Формуємо команду</span><br>
-    <span data-i18n="hero.line2">спеціалістів</span><br>
-    <span class="gold" data-i18n="hero.line3">у Бельгії</span>
-  </h1>
-  <p class="hero-sub" data-i18n="hero.subtitle">Легальне працевлаштування та повний супровід для кваліфікованих спеціалістів</p>
-  <a href="#contact" class="btn btn-accent" data-i18n="hero.cta">Залишити заявку</a>
-</div>
+  <div class="hero-text">
+    <h1><span data-i18n="hero.line1">Формуємо команду</span><br><span data-i18n="hero.line2">спеціалістів</span><br><span data-i18n="hero.line3">у Бельгії</span></h1>
+    <div><a href="#contact" class="btn-pill btn-outline" data-i18n="hero.cta">Заповнити форму</a></div>
+  </div>
+  <div class="hero-photos">
+    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=75" alt="" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=75" alt="" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&q=75" alt="" loading="lazy">
+  </div>
 </section>
 
-<!-- PHOTO STRIP -->
-<div class="photo-strip">
-  <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=75" alt="workers" loading="lazy">
-  <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=75" alt="warehouse" loading="lazy">
-  <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&q=75" alt="construction" loading="lazy">
-  <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=75" alt="team" loading="lazy">
-</div>
-
 <!-- ABOUT -->
-<section class="section section-dark" id="about">
+<section class="section section-gray" id="about">
 <div class="wrap">
-  <h2 class="section-title sr"><span data-i18n="about.title">Про компанію</span></h2>
-  <div class="section-line sr"></div>
-  <p class="section-text sr" data-i18n="about.text1">Robota Belgium — рекрутингова компанія, зареєстрована в Бельгії, що спеціалізується на підборі кваліфікованих спеціалістів для бельгійських роботодавців.</p>
-  <div class="about-grid">
-    <img class="about-img sr" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=75" alt="work" loading="lazy">
-    <div class="about-cards">
-      <div class="about-card sr sr-d1"><h3 data-i18n="about.stat1">⚖️ Легальне оформлення</h3><p data-i18n="about.stat1d">Контракт з бельгійським роботодавцем або офіційна самозайнятість</p></div>
-      <div class="about-card sr sr-d2"><h3 data-i18n="about.stat2">🤝 Супровід</h3><p data-i18n="about.stat2d">Допомога з документами, реєстрацією та адаптацією</p></div>
-      <div class="about-card sr sr-d3"><h3 data-i18n="about.stat3">🔍 Прозорість</h3><p data-i18n="about.stat3d">Жодних прихованих платежів — всі умови фіксуються в договорі</p></div>
-    </div>
+  <p class="body-text sr" data-i18n="about.text1">Robota Belgium — рекрутингова компанія, зареєстрована в Бельгії, що спеціалізується на формуванні команди висококваліфікованих спеціалістів для роботи в Бельгії. Ми пропонуємо унікальні можливості, які дозволяють нашим клієнтам отримати роботу у легальній бельгійській компанії з достойною оплатою. Крім того, ми надаємо повний спектр послуг з оформлення статусу підприємця в Бельгії та забезпечуємо бухгалтерське супроводження для зручності наших клієнтів.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;justify-content:center" class="sr">
+    <a href="#contact" class="btn-pill btn-green" data-i18n="cta.vacancy">Вакансії →</a>
+    <a href="https://docs.google.com/forms/d/1cQseTreeTuTtPbL4mNibFzoX5Yaz_Kq1CspR96-pri4/viewform" target="_blank" class="btn-pill btn-green" style="gap:8px" data-i18n="cta.form">Заповнити форму ☺</a>
+    <a href="https://t.me/robotabelgium_info" target="_blank" class="btn-pill btn-dark" data-i18n="cta.write">Написати нам</a>
   </div>
 </div>
 </section>
 
+<!-- PHOTO DIVIDER -->
+<div style="width:100%;height:280px;background:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=75') center/cover;position:relative">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,.4)"></div>
+</div>
+
 <!-- SERVICES -->
-<section class="section section-darker" id="services">
+<section class="section section-dark" id="services">
 <div class="wrap">
-  <h2 class="section-title sr"><span data-i18n="services.title">Наші послуги</span></h2>
+  <h2 class="section-title sr" data-i18n="services.title">Наші послуги</h2>
   <div class="section-line sr"></div>
   <div class="service-grid">
     <div class="service-card sr sr-d1"><div class="icon">🎯</div><h3 data-i18n="services.s1t">Підбір вакансій</h3><p data-i18n="services.s1d">Підбираємо позиції відповідно до вашої кваліфікації, досвіду та побажань. Працюємо з перевіреними бельгійськими роботодавцями.</p></div>
@@ -321,15 +209,15 @@ textarea.form-input{resize:vertical;min-height:80px}
 </section>
 
 <!-- PROCESS -->
-<section class="section-photo section" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80')" id="process">
+<section class="section section-gray" id="process">
 <div class="wrap">
-  <h2 class="section-title sr"><span data-i18n="process.title">Як це працює</span></h2>
+  <h2 class="section-title sr" data-i18n="process.title">Як це працює</h2>
   <div class="section-line sr"></div>
   <div class="process-row">
-    <div class="step sr sr-d1"><div class="step-num">01</div><h3 data-i18n="process.s1t">Заявка</h3><p data-i18n="process.s1d">Заповніть форму або зв'яжіться з нами. Ми уточнимо вашу спеціальність та побажання.</p></div>
-    <div class="step sr sr-d2"><div class="step-num">02</div><h3 data-i18n="process.s2t">Підбір</h3><p data-i18n="process.s2d">Підбираємо відповідні вакансії та узгоджуємо умови з роботодавцем.</p></div>
-    <div class="step sr sr-d3"><div class="step-num">03</div><h3 data-i18n="process.s3t">Документи</h3><p data-i18n="process.s3d">Оформлюємо всі необхідні документи для легального працевлаштування.</p></div>
-    <div class="step sr sr-d4"><div class="step-num">04</div><h3 data-i18n="process.s4t">Старт</h3><p data-i18n="process.s4d">Допомагаємо з переїздом, реєстрацією та адаптацією на новому місці.</p></div>
+    <div class="step sr sr-d1"><div class="step-num">01</div><h3 data-i18n="process.s1t">Заявка</h3><p data-i18n="process.s1d">Заповніть форму або зв'яжіться з нами.</p></div>
+    <div class="step sr sr-d2"><div class="step-num">02</div><h3 data-i18n="process.s2t">Підбір</h3><p data-i18n="process.s2d">Підбираємо вакансії та узгоджуємо умови.</p></div>
+    <div class="step sr sr-d3"><div class="step-num">03</div><h3 data-i18n="process.s3t">Документи</h3><p data-i18n="process.s3d">Оформлюємо документи для легальної роботи.</p></div>
+    <div class="step sr sr-d4"><div class="step-num">04</div><h3 data-i18n="process.s4t">Старт</h3><p data-i18n="process.s4d">Допомагаємо з переїздом та адаптацією.</p></div>
   </div>
 </div>
 </section>
@@ -337,74 +225,47 @@ textarea.form-input{resize:vertical;min-height:80px}
 <!-- SECTORS -->
 <section class="section section-dark">
 <div class="wrap">
-  <h2 class="section-title sr"><span data-i18n="sectors.title">Сектори</span></h2>
+  <h2 class="section-title sr" data-i18n="sectors.title">Сектори</h2>
   <div class="section-line sr"></div>
   <div class="sector-strip sr" id="sectorTags"></div>
 </div>
 </section>
 
-<!-- CTA BANNER -->
-<div class="cta-banner">
-<div class="wrap">
+<!-- CTA -->
+<div class="cta-section">
   <h2 class="sr" data-i18n="cta.title">Готові почати?</h2>
   <p class="sr" data-i18n="cta.sub">Заповніть форму — ми зв'яжемося протягом 2 робочих днів</p>
-  <a href="#contact" class="btn btn-accent sr" data-i18n="hero.cta">Залишити заявку</a>
-</div>
+  <a href="https://docs.google.com/forms/d/1cQseTreeTuTtPbL4mNibFzoX5Yaz_Kq1CspR96-pri4/viewform" target="_blank" class="btn-pill btn-green sr" data-i18n="hero.cta">Заповнити форму</a>
 </div>
 
 <!-- FAQ -->
-<section class="section section-darker" id="faq">
+<section class="section section-gray" id="faq">
 <div class="wrap">
-  <h2 class="section-title sr"><span data-i18n="faq.title">Часті питання</span></h2>
+  <h2 class="section-title sr" data-i18n="faq.title">Часті питання</h2>
   <div class="section-line sr"></div>
   <div class="faq-list sr" id="faqList"></div>
 </div>
 </section>
 
-<!-- LEGAL -->
-<section class="section section-dark">
-<div class="wrap">
-  <h2 class="section-title sr"><span data-i18n="legal.title">Юридична інформація</span></h2>
-  <div class="section-line sr"></div>
-  <div class="legal-box sr">
-    <div class="legal-row"><div class="legal-label" data-i18n="legal.company">Назва компанії</div><div class="legal-val" data-i18n="legal.placeholder">[Буде додано після реєстрації]</div></div>
-    <div class="legal-row"><div class="legal-label" data-i18n="legal.bce">Номер BCE/KBO</div><div class="legal-val" data-i18n="legal.placeholder">[Буде додано після реєстрації]</div></div>
-    <div class="legal-row"><div class="legal-label" data-i18n="legal.address">Юридична адреса</div><div class="legal-val" data-i18n="legal.placeholder">[Буде додано після реєстрації]</div></div>
-    <div class="legal-row"><div class="legal-label" data-i18n="legal.responsible">Відповідальна особа</div><div class="legal-val" data-i18n="legal.placeholder">[Буде додано після реєстрації]</div></div>
-    <p class="legal-note" data-i18n="legal.note">Robota Belgium діє відповідно до бельгійського законодавства про працевлаштування та рекрутинг.</p>
-  </div>
-</div>
-</section>
-
 <!-- CONTACT -->
-<section class="section section-darker" id="contact">
+<section class="section section-dark" id="contact">
 <div class="wrap">
-  <h2 class="section-title sr"><span data-i18n="contact.title">Зв'яжіться з нами</span></h2>
+  <h2 class="section-title sr" data-i18n="contact.title">Зв'яжіться з нами</h2>
   <div class="section-line sr"></div>
-  <div class="contact-grid">
-    <div class="sr">
-      <h3 data-i18n="contact.form">Залишити заявку</h3>
-      <div class="form-stack" id="contactForm">
-        <input class="form-input" type="text" data-ph="contact.name" placeholder="Ім'я та прізвище">
-        <input class="form-input" type="email" data-ph="contact.email" placeholder="Email">
-        <input class="form-input" type="tel" data-ph="contact.phone" placeholder="Телефон">
-        <input class="form-input" type="text" data-ph="contact.specialty" placeholder="Спеціальність / досвід">
-        <textarea class="form-input" rows="3" data-ph="contact.message" placeholder="Повідомлення"></textarea>
-        <button class="btn btn-accent" style="width:100%;text-align:center" onclick="submitForm()" data-i18n="contact.send">Надіслати заявку</button>
-      </div>
-      <div class="form-success" id="formSuccess" data-i18n="contact.success">✓ Дякуємо! Ми зв'яжемося з вами протягом 2 робочих днів.</div>
-    </div>
-    <div class="sr sr-d2">
-      <h3 data-i18n="contact.or">Або напишіть нам напряму</h3>
-      <div class="direct-links">
-        <a class="direct-link" href="https://t.me/robotabelgium_info" target="_blank" rel="noopener">
-          <span class="dl-icon">✈️</span>
-          <div><div class="dl-label">Telegram</div><div class="dl-sub">@robotabelgium_info</div></div>
-        </a>
-        <a class="direct-link" href="https://www.facebook.com/robotaBelgium/" target="_blank" rel="noopener">
-          <span class="dl-icon">📘</span>
-          <div><div class="dl-label">Facebook</div><div class="dl-sub">Robota Belgium</div></div>
-        </a>
+  <div class="contact-box sr">
+    <p style="color:var(--text-dim);margin-bottom:28px;font-size:16px" data-i18n="contact.desc">Заповніть форму і ми зв'яжемося з вами найближчим часом</p>
+    <a href="https://docs.google.com/forms/d/1cQseTreeTuTtPbL4mNibFzoX5Yaz_Kq1CspR96-pri4/viewform" target="_blank" class="form-big-btn" data-i18n="contact.fill">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Заповнити форму
+    </a>
+    <div style="margin-top:40px">
+      <p style="color:var(--text-dim);margin-bottom:16px;font-size:14px" data-i18n="contact.or">Або напишіть нам напряму</p>
+      <div class="social-row">
+        <a class="social-btn" href="https://t.me/robotabelgium_info" target="_blank" style="background:var(--tg)"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.013 12.013 0 0 0 11.944 0Zm4.962 7.166c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.064-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635Z"/></svg> Telegram</a>
+        <a class="social-btn" href="https://www.instagram.com/robotabelgium.info" target="_blank" style="background:linear-gradient(45deg,#f09433,#dc2743,#bc1888)"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg> Instagram</a>
+        <a class="social-btn" href="https://www.tiktok.com/@robotabelgium.info" target="_blank" style="background:#111"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.75a8.18 8.18 0 0 0 4.76 1.52V6.84a4.84 4.84 0 0 1-1-.15z"/></svg> TikTok</a>
+        <a class="social-btn" href="https://www.facebook.com/profile.php?id=61558649014040" target="_blank" style="background:var(--fb)"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a>
+        <a class="social-btn" href="https://invite.viber.com/?g2=AQBhQtCWPy%2FjW1NmmbFtHEdIc6hRrpL2D1UPXZQu%2BWHVTLnp8z5r9j4Aru%2BMnHLq&lang=en" target="_blank" style="background:#7360f2"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M11.4 0C9.473.028 5.333.344 3.02 2.467 1.302 4.187.541 6.825.453 10.096c-.088 3.27-.198 9.401 5.751 11.083h.005l-.004 2.533s-.039.981.63 1.181c.752.227 1.163-.455 1.87-1.228l1.283-1.462c3.54.299 6.263-.385 6.575-.491.717-.244 4.773-.754 5.435-6.148.682-5.56-.321-9.065-2.121-10.65-.538-.488-2.664-2.03-7.398-2.26 0 0-.348-.025-.876-.023z"/></svg> Viber</a>
       </div>
     </div>
   </div>
@@ -414,51 +275,37 @@ textarea.form-input{resize:vertical;min-height:80px}
 <!-- FOOTER -->
 <footer class="footer">
 <div class="wrap">
-  <div class="footer-top">
-    <span data-i18n="footer.privacy">Політика конфіденційності</span>
-    <span data-i18n="footer.terms">Умови використання</span>
-  </div>
-  <div class="footer-copy">© <script>document.write(new Date().getFullYear())</script> Robota Belgium. <span data-i18n="footer.rights">Усі права захищені</span>.</div>
+  <div class="footer-links"><span data-i18n="footer.privacy">Політика конфіденційності</span><span data-i18n="footer.terms">Умови використання</span></div>
+  <div class="footer-copy">©<script>document.write(new Date().getFullYear())</script> by Robota Belgium.Info. <span data-i18n="footer.rights">Усі права захищені</span>.</div>
   <p class="footer-disc" data-i18n="footer.disclaimer">Цей сайт не є гарантією працевлаштування. Всі умови фіксуються в індивідуальному договорі.</p>
 </div>
 </footer>
 
 <script>
 const T={
-uk:{"nav.home":"Головна","nav.about":"Про нас","nav.services":"Послуги","nav.process":"Як це працює","nav.faq":"FAQ","nav.contact":"Контакти","hero.line1":"Формуємо команду","hero.line2":"спеціалістів","hero.line3":"у Бельгії","hero.subtitle":"Легальне працевлаштування та повний супровід для кваліфікованих спеціалістів","hero.cta":"Залишити заявку","about.title":"Про компанію","about.text1":"Robota Belgium — рекрутингова компанія, зареєстрована в Бельгії, що спеціалізується на підборі кваліфікованих спеціалістів для бельгійських роботодавців. Ми забезпечуємо повний юридичний супровід процесу працевлаштування: від підбору вакансії до оформлення всіх необхідних документів відповідно до бельгійського законодавства.","about.stat1":"⚖️ Легальне оформлення","about.stat1d":"Контракт з бельгійським роботодавцем або офіційна самозайнятість","about.stat2":"🤝 Супровід","about.stat2d":"Допомога з документами, реєстрацією та адаптацією","about.stat3":"🔍 Прозорість","about.stat3d":"Жодних прихованих платежів — всі умови фіксуються в договорі","services.title":"Наші послуги","services.s1t":"Підбір вакансій","services.s1d":"Підбираємо позиції відповідно до вашої кваліфікації, досвіду та побажань. Працюємо з перевіреними бельгійськими роботодавцями.","services.s2t":"Оформлення документів","services.s2d":"Допомога з робочим дозволом, реєстрацією в комуні, соціальним страхуванням та відкриттям банківського рахунку.","services.s3t":"Статус самозайнятого","services.s3d":"Для досвідчених спеціалістів — допомога з реєстрацією як zelfstandige (indépendant) з бухгалтерським супроводом.","services.s4t":"Адаптація та підтримка","services.s4d":"Консультації з питань житла, транспорту, мовних курсів та інтеграції в бельгійське суспільство.","process.title":"Як це працює","process.s1t":"Заявка","process.s1d":"Заповніть форму або зв'яжіться з нами. Ми уточнимо вашу спеціальність та побажання.","process.s2t":"Підбір","process.s2d":"Підбираємо відповідні вакансії та узгоджуємо умови з роботодавцем.","process.s3t":"Документи","process.s3d":"Оформлюємо всі необхідні документи для легального працевлаштування.","process.s4t":"Старт","process.s4d":"Допомагаємо з переїздом, реєстрацією та адаптацією на новому місці.","sectors.title":"Сектори","faq.title":"Часті питання","legal.title":"Юридична інформація","legal.company":"Назва компанії","legal.bce":"Номер BCE/KBO","legal.address":"Юридична адреса","legal.responsible":"Відповідальна особа","legal.placeholder":"[Буде додано після реєстрації]","legal.note":"Robota Belgium діє відповідно до бельгійського законодавства про працевлаштування та рекрутинг.","contact.title":"Зв'яжіться з нами","contact.form":"Залишити заявку","contact.name":"Ім'я та прізвище","contact.email":"Email","contact.phone":"Телефон","contact.specialty":"Спеціальність / досвід","contact.message":"Повідомлення","contact.send":"Надіслати заявку","contact.or":"Або напишіть нам напряму","contact.success":"✓ Дякуємо! Ми зв'яжемося з вами протягом 2 робочих днів.","footer.rights":"Усі права захищені","footer.privacy":"Політика конфіденційності","footer.terms":"Умови використання","footer.disclaimer":"Цей сайт не є гарантією працевлаштування. Всі умови фіксуються в індивідуальному договорі.","cta.title":"Готові почати?","cta.sub":"Заповніть форму — ми зв'яжемося протягом 2 робочих днів"},
-en:{"nav.home":"Home","nav.about":"About","nav.services":"Services","nav.process":"How it works","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Building a team","hero.line2":"of specialists","hero.line3":"in Belgium","hero.subtitle":"Legal employment and full support for qualified specialists","hero.cta":"Apply Now","about.title":"About Us","about.text1":"Robota Belgium is a recruitment company registered in Belgium, specializing in matching qualified professionals with Belgian employers. We provide full legal support throughout the employment process.","about.stat1":"⚖️ Legal Employment","about.stat1d":"Contract with a Belgian employer or official self-employment","about.stat2":"🤝 Full Support","about.stat2d":"Assistance with documents, registration, and adaptation","about.stat3":"🔍 Transparency","about.stat3d":"No hidden fees — all conditions are fixed in a written agreement","services.title":"Our Services","services.s1t":"Job Matching","services.s1d":"We select positions matching your qualifications, experience, and preferences. We work with verified Belgian employers.","services.s2t":"Document Processing","services.s2d":"Assistance with work permits, commune registration, social insurance, and bank account opening.","services.s3t":"Self-Employment","services.s3d":"For experienced professionals — registration as zelfstandige (indépendant) with accounting support.","services.s4t":"Adaptation & Support","services.s4d":"Consultations on housing, transport, language courses, and integration into Belgian society.","process.title":"How It Works","process.s1t":"Apply","process.s1d":"Fill out the form or contact us. We'll clarify your specialty and preferences.","process.s2t":"Matching","process.s2d":"We select suitable vacancies and negotiate conditions with the employer.","process.s3t":"Documents","process.s3d":"We process all necessary documents for legal employment.","process.s4t":"Start","process.s4d":"We help with relocation, registration, and adaptation.","sectors.title":"Sectors","faq.title":"FAQ","legal.title":"Legal Information","legal.company":"Company Name","legal.bce":"BCE/KBO Number","legal.address":"Registered Address","legal.responsible":"Responsible Person","legal.placeholder":"[To be added after registration]","legal.note":"Robota Belgium operates in accordance with Belgian employment legislation.","contact.title":"Contact Us","contact.form":"Submit Application","contact.name":"Full Name","contact.email":"Email","contact.phone":"Phone","contact.specialty":"Specialty / Experience","contact.message":"Message","contact.send":"Submit Application","contact.or":"Or write to us directly","contact.success":"✓ Thank you! We'll contact you within 2 business days.","footer.rights":"All rights reserved","footer.privacy":"Privacy Policy","footer.terms":"Terms of Use","footer.disclaimer":"This website is not a guarantee of employment. All conditions are fixed in an individual agreement.","cta.title":"Ready to start?","cta.sub":"Fill out the form — we'll contact you within 2 business days"},
-nl:{"nav.home":"Home","nav.about":"Over ons","nav.services":"Diensten","nav.process":"Werkwijze","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Wij bouwen een team","hero.line2":"van specialisten","hero.line3":"in België","hero.subtitle":"Legale tewerkstelling en volledige begeleiding voor gekwalificeerde specialisten","hero.cta":"Solliciteer nu","about.title":"Over Ons","about.text1":"Robota Belgium is een in België geregistreerd rekruteringsbedrijf, gespecialiseerd in het matchen van gekwalificeerde professionals met Belgische werkgevers.","about.stat1":"⚖️ Legale Tewerkstelling","about.stat1d":"Contract met een Belgische werkgever of officiële zelfstandige activiteit","about.stat2":"🤝 Begeleiding","about.stat2d":"Hulp bij documenten, registratie en aanpassing","about.stat3":"🔍 Transparantie","about.stat3d":"Geen verborgen kosten — alle voorwaarden in een schriftelijke overeenkomst","services.title":"Onze Diensten","services.s1t":"Vacatures Zoeken","services.s1d":"Wij selecteren functies passend bij uw kwalificaties en ervaring. Wij werken met geverifieerde werkgevers.","services.s2t":"Documentverwerking","services.s2d":"Hulp bij werkvergunningen, gemeenteregistratie, sociale verzekering en bankrekening.","services.s3t":"Zelfstandigenstatuut","services.s3d":"Hulp bij registratie als zelfstandige met boekhoudkundige begeleiding.","services.s4t":"Aanpassing & Ondersteuning","services.s4d":"Consultaties over huisvesting, vervoer, taalcursussen en integratie.","process.title":"Werkwijze","process.s1t":"Aanvraag","process.s1d":"Vul het formulier in of neem contact op. Wij verduidelijken uw specialisatie.","process.s2t":"Matching","process.s2d":"Wij selecteren passende vacatures en onderhandelen met de werkgever.","process.s3t":"Documenten","process.s3d":"Wij verwerken alle documenten voor legale tewerkstelling.","process.s4t":"Aan de slag","process.s4d":"Wij helpen bij verhuizing, registratie en aanpassing.","sectors.title":"Sectoren","faq.title":"Veelgestelde Vragen","legal.title":"Juridische Informatie","legal.company":"Bedrijfsnaam","legal.bce":"KBO-nummer","legal.address":"Maatschappelijke zetel","legal.responsible":"Verantwoordelijke","legal.placeholder":"[Wordt toegevoegd na registratie]","legal.note":"Robota Belgium handelt conform de Belgische wetgeving inzake tewerkstelling.","contact.title":"Contacteer Ons","contact.form":"Aanvraag Indienen","contact.name":"Volledige naam","contact.email":"E-mail","contact.phone":"Telefoon","contact.specialty":"Specialisatie / Ervaring","contact.message":"Bericht","contact.send":"Verzenden","contact.or":"Of schrijf ons rechtstreeks","contact.success":"✓ Bedankt! Wij nemen binnen 2 werkdagen contact op.","footer.rights":"Alle rechten voorbehouden","footer.privacy":"Privacybeleid","footer.terms":"Gebruiksvoorwaarden","footer.disclaimer":"Deze website is geen garantie voor tewerkstelling.","cta.title":"Klaar om te beginnen?","cta.sub":"Vul het formulier in — wij nemen binnen 2 werkdagen contact op"},
-fr:{"nav.home":"Accueil","nav.about":"À propos","nav.services":"Services","nav.process":"Comment ça marche","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Nous formons une équipe","hero.line2":"de spécialistes","hero.line3":"en Belgique","hero.subtitle":"Emploi légal et accompagnement complet pour spécialistes qualifiés","hero.cta":"Postuler","about.title":"À Propos","about.text1":"Robota Belgium est une société de recrutement enregistrée en Belgique, spécialisée dans la mise en relation de professionnels qualifiés avec des employeurs belges.","about.stat1":"⚖️ Emploi Légal","about.stat1d":"Contrat avec un employeur belge ou activité indépendante officielle","about.stat2":"🤝 Accompagnement","about.stat2d":"Aide aux documents, inscription et adaptation","about.stat3":"🔍 Transparence","about.stat3d":"Aucun frais caché — conditions fixées par accord écrit","services.title":"Nos Services","services.s1t":"Recherche de Postes","services.s1d":"Postes correspondant à vos qualifications. Employeurs belges vérifiés.","services.s2t":"Documents","services.s2d":"Permis de travail, inscription commune, assurance sociale, compte bancaire.","services.s3t":"Statut Indépendant","services.s3d":"Inscription comme indépendant avec accompagnement comptable.","services.s4t":"Adaptation & Soutien","services.s4d":"Logement, transport, cours de langue et intégration.","process.title":"Comment Ça Marche","process.s1t":"Candidature","process.s1d":"Remplissez le formulaire ou contactez-nous.","process.s2t":"Sélection","process.s2d":"Nous sélectionnons les postes et négocions avec l'employeur.","process.s3t":"Documents","process.s3d":"Tous les documents nécessaires pour un emploi légal.","process.s4t":"Début","process.s4d":"Aide au déménagement, inscription et adaptation.","sectors.title":"Secteurs","faq.title":"Questions Fréquentes","legal.title":"Informations Légales","legal.company":"Nom de la société","legal.bce":"Numéro BCE","legal.address":"Siège social","legal.responsible":"Responsable","legal.placeholder":"[À ajouter après enregistrement]","legal.note":"Robota Belgium agit conformément à la législation belge.","contact.title":"Contactez-Nous","contact.form":"Candidature","contact.name":"Nom complet","contact.email":"E-mail","contact.phone":"Téléphone","contact.specialty":"Spécialité / Expérience","contact.message":"Message","contact.send":"Envoyer","contact.or":"Ou écrivez-nous","contact.success":"✓ Merci ! Nous vous contacterons dans les 2 jours ouvrables.","footer.rights":"Tous droits réservés","footer.privacy":"Politique de confidentialité","footer.terms":"Conditions d'utilisation","footer.disclaimer":"Ce site ne constitue pas une garantie d'emploi.","cta.title":"Prêt à commencer ?","cta.sub":"Remplissez le formulaire — réponse sous 2 jours ouvrables"}
+uk:{"brand":"Робота Бельгія","nav.home":"Головна","nav.about":"Про нас","nav.services":"Послуги","nav.process":"Як це працює","nav.faq":"FAQ","nav.contact":"Контакти","hero.line1":"Формуємо команду","hero.line2":"спеціалістів","hero.line3":"у Бельгії","hero.cta":"Заповнити форму","about.text1":"Robota Belgium — рекрутингова компанія, зареєстрована в Бельгії, що спеціалізується на формуванні команди висококваліфікованих спеціалістів для роботи в Бельгії. Ми пропонуємо унікальні можливості, які дозволяють нашим клієнтам отримати роботу у легальній бельгійській компанії з достойною оплатою. Крім того, ми надаємо повний спектр послуг з оформлення статусу підприємця в Бельгії та забезпечуємо бухгалтерське супроводження для зручності наших клієнтів.","cta.vacancy":"Вакансії →","cta.form":"Заповнити форму ☺","cta.write":"Написати нам","services.title":"Наші послуги","services.s1t":"Підбір вакансій","services.s1d":"Підбираємо позиції відповідно до вашої кваліфікації, досвіду та побажань. Працюємо з перевіреними бельгійськими роботодавцями.","services.s2t":"Оформлення документів","services.s2d":"Допомога з робочим дозволом, реєстрацією в комуні, соціальним страхуванням та відкриттям банківського рахунку.","services.s3t":"Статус самозайнятого","services.s3d":"Для досвідчених спеціалістів — допомога з реєстрацією як zelfstandige (indépendant) з бухгалтерським супроводом.","services.s4t":"Адаптація та підтримка","services.s4d":"Консультації з питань житла, транспорту, мовних курсів та інтеграції в бельгійське суспільство.","process.title":"Як це працює","process.s1t":"Заявка","process.s1d":"Заповніть форму або зв'яжіться з нами.","process.s2t":"Підбір","process.s2d":"Підбираємо вакансії та узгоджуємо умови.","process.s3t":"Документи","process.s3d":"Оформлюємо документи для легальної роботи.","process.s4t":"Старт","process.s4d":"Допомагаємо з переїздом та адаптацією.","sectors.title":"Сектори","faq.title":"Часті питання","contact.title":"Зв'яжіться з нами","contact.desc":"Заповніть форму і ми зв'яжемося з вами найближчим часом","contact.fill":"Заповнити форму","contact.or":"Або напишіть нам напряму","footer.rights":"Усі права захищені","footer.privacy":"Політика конфіденційності","footer.terms":"Умови використання","footer.disclaimer":"Цей сайт не є гарантією працевлаштування. Всі умови фіксуються в індивідуальному договорі.","cta.title":"Готові почати?","cta.sub":"Заповніть форму — ми зв'яжемося протягом 2 робочих днів"},
+en:{"brand":"Robota Belgium","nav.home":"Home","nav.about":"About","nav.services":"Services","nav.process":"How it works","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Building a team","hero.line2":"of specialists","hero.line3":"in Belgium","hero.cta":"Apply Now","about.text1":"Robota Belgium is a recruitment company registered in Belgium, specializing in building teams of qualified specialists. We offer legal employment with Belgian companies at competitive rates, plus full support for entrepreneur status registration and accounting.","cta.vacancy":"Vacancies →","cta.form":"Apply ☺","cta.write":"Write to us","services.title":"Our Services","services.s1t":"Job Matching","services.s1d":"Positions matching your qualifications. Verified Belgian employers.","services.s2t":"Documents","services.s2d":"Work permits, commune registration, social insurance, bank account.","services.s3t":"Self-Employment","services.s3d":"Registration as zelfstandige (indépendant) with accounting.","services.s4t":"Adaptation","services.s4d":"Housing, transport, language courses, integration.","process.title":"How It Works","process.s1t":"Apply","process.s1d":"Fill out the form or contact us.","process.s2t":"Match","process.s2d":"We find vacancies and negotiate.","process.s3t":"Documents","process.s3d":"We handle all paperwork.","process.s4t":"Start","process.s4d":"We help with relocation.","sectors.title":"Sectors","faq.title":"FAQ","contact.title":"Contact Us","contact.desc":"Fill out the form and we'll get back to you soon","contact.fill":"Fill out the form","contact.or":"Or write to us directly","footer.rights":"All rights reserved","footer.privacy":"Privacy","footer.terms":"Terms","footer.disclaimer":"Not a guarantee of employment.","cta.title":"Ready?","cta.sub":"Apply now — we reply within 2 days"},
+nl:{"brand":"Robota Belgium","nav.home":"Home","nav.about":"Over ons","nav.services":"Diensten","nav.process":"Werkwijze","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Wij bouwen","hero.line2":"een team","hero.line3":"in België","hero.cta":"Solliciteer","about.text1":"Robota Belgium is een in België geregistreerd rekruteringsbedrijf dat teams van gekwalificeerde specialisten samenstelt. Legale tewerkstelling bij Belgische bedrijven, plus registratie als zelfstandige met boekhouding.","cta.vacancy":"Vacatures →","cta.form":"Solliciteer ☺","cta.write":"Schrijf ons","services.title":"Diensten","services.s1t":"Vacatures","services.s1d":"Functies bij geverifieerde werkgevers.","services.s2t":"Documenten","services.s2d":"Werkvergunning, gemeente, verzekering, bankrekening.","services.s3t":"Zelfstandige","services.s3d":"Registratie als zelfstandige met boekhouding.","services.s4t":"Aanpassing","services.s4d":"Huisvesting, vervoer, taalcursussen.","process.title":"Werkwijze","process.s1t":"Aanvraag","process.s1d":"Vul het formulier in.","process.s2t":"Matching","process.s2d":"Wij zoeken vacatures.","process.s3t":"Documenten","process.s3d":"Wij regelen het papierwerk.","process.s4t":"Start","process.s4d":"Wij helpen bij verhuizing.","sectors.title":"Sectoren","faq.title":"FAQ","contact.title":"Contact","contact.desc":"Vul het formulier in, wij nemen snel contact op","contact.fill":"Formulier invullen","contact.or":"Of schrijf ons rechtstreeks","footer.rights":"Alle rechten","footer.privacy":"Privacy","footer.terms":"Voorwaarden","footer.disclaimer":"Geen garantie voor tewerkstelling.","cta.title":"Klaar?","cta.sub":"Solliciteer — reactie binnen 2 dagen"},
+fr:{"brand":"Robota Belgium","nav.home":"Accueil","nav.about":"À propos","nav.services":"Services","nav.process":"Processus","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Nous formons","hero.line2":"une équipe","hero.line3":"en Belgique","hero.cta":"Postuler","about.text1":"Robota Belgium est une société de recrutement en Belgique, spécialisée dans la constitution d'équipes de spécialistes qualifiés. Emploi légal, inscription comme indépendant, suivi comptable.","cta.vacancy":"Postes →","cta.form":"Postuler ☺","cta.write":"Nous écrire","services.title":"Services","services.s1t":"Postes","services.s1d":"Postes chez des employeurs vérifiés.","services.s2t":"Documents","services.s2d":"Permis, commune, assurance, compte bancaire.","services.s3t":"Indépendant","services.s3d":"Inscription comme indépendant avec comptabilité.","services.s4t":"Adaptation","services.s4d":"Logement, transport, langue.","process.title":"Processus","process.s1t":"Candidature","process.s1d":"Remplissez le formulaire.","process.s2t":"Sélection","process.s2d":"Nous cherchons des postes.","process.s3t":"Documents","process.s3d":"Nous gérons les formalités.","process.s4t":"Début","process.s4d":"Aide au déménagement.","sectors.title":"Secteurs","faq.title":"FAQ","contact.title":"Contact","contact.desc":"Remplissez le formulaire, nous vous répondons rapidement","contact.fill":"Remplir le formulaire","contact.or":"Ou écrivez-nous directement","footer.rights":"Tous droits réservés","footer.privacy":"Confidentialité","footer.terms":"Conditions","footer.disclaimer":"Pas une garantie d'emploi.","cta.title":"Prêt ?","cta.sub":"Postulez — réponse sous 2 jours"}
 };
-
-const sectors={uk:["Будівництво","Логістика","Виробництво","Сільське господарство","Прибирання","HoReCa","Транспорт","Технічне обслуговування"],en:["Construction","Logistics","Manufacturing","Agriculture","Cleaning","HoReCa","Transport","Maintenance"],nl:["Bouw","Logistiek","Productie","Landbouw","Schoonmaak","HoReCa","Transport","Onderhoud"],fr:["Construction","Logistique","Production","Agriculture","Nettoyage","HoReCa","Transport","Maintenance"]};
+const sectors={uk:["Будівництво","Логістика","Виробництво","Сільське господарство","Прибирання","HoReCa","Транспорт","Тех. обслуговування"],en:["Construction","Logistics","Manufacturing","Agriculture","Cleaning","HoReCa","Transport","Maintenance"],nl:["Bouw","Logistiek","Productie","Landbouw","Schoonmaak","HoReCa","Transport","Onderhoud"],fr:["Construction","Logistique","Production","Agriculture","Nettoyage","HoReCa","Transport","Maintenance"]};
 const sI=["🏗️","📦","🏭","🌾","🧹","🍽️","🚛","🔧"];
 const faqs={
-uk:[{q:"Чи потрібно платити за ваші послуги?",a:"Умови та вартість обговорюються індивідуально і фіксуються в письмовому договорі. Прихованих платежів немає."},{q:"Які документи потрібні?",a:"Закордонний паспорт, CV, документи про освіту/кваліфікацію. Додаткові — залежно від ситуації."},{q:"Різниця між найманою працею та самозайнятістю?",a:"Найманий працівник працює за контрактом. Самозайнятий (zelfstandige/indépendant) — як підприємець. Ми допоможемо обрати оптимальний варіант."},{q:"Чи забезпечуєте ви житло?",a:"Допомагаємо з пошуком та рекомендаціями. Деякі роботодавці пропонують житло."}],
-en:[{q:"Do I need to pay?",a:"Terms and costs are discussed individually and fixed in a written agreement. No hidden fees."},{q:"What documents are needed?",a:"International passport, CV, education documents. Additional docs depend on your situation."},{q:"Employment vs self-employment?",a:"Employee works under contract. Self-employed (zelfstandige/indépendant) works as entrepreneur. We'll help you choose."},{q:"Do you provide housing?",a:"We help with search and recommendations. Some employers offer housing."}],
-nl:[{q:"Moet ik betalen?",a:"Voorwaarden en kosten worden individueel besproken en vastgelegd. Geen verborgen kosten."},{q:"Welke documenten?",a:"Paspoort, CV, opleidingsdocumenten. Aanvullende documenten afhankelijk van situatie."},{q:"Loondienst vs zelfstandige?",a:"Werknemer werkt onder contract. Zelfstandige als ondernemer. Wij helpen kiezen."},{q:"Huisvesting?",a:"Wij helpen zoeken. Sommige werkgevers bieden huisvesting."}],
-fr:[{q:"Dois-je payer ?",a:"Conditions et coûts discutés individuellement, fixés par accord écrit. Aucun frais caché."},{q:"Quels documents ?",a:"Passeport, CV, documents d'éducation. Suppléments selon votre situation."},{q:"Salarié vs indépendant ?",a:"Salarié sous contrat. Indépendant comme entrepreneur. Nous vous aidons à choisir."},{q:"Logement ?",a:"Nous aidons à chercher. Certains employeurs proposent un logement."}]
+uk:[{q:"Чи потрібно платити за ваші послуги?",a:"Умови та вартість обговорюються індивідуально і фіксуються в письмовому договорі. Прихованих платежів немає."},{q:"Які документи потрібні?",a:"Закордонний паспорт, CV, документи про освіту. Додаткові — залежно від ситуації."},{q:"Різниця між найманою працею та самозайнятістю?",a:"Найманий працює за контрактом. Самозайнятий (zelfstandige/indépendant) — як підприємець. Ми допоможемо обрати."},{q:"Чи є житло?",a:"Допомагаємо з пошуком. Деякі роботодавці пропонують житло."}],
+en:[{q:"Do I need to pay?",a:"Terms discussed individually, fixed in writing. No hidden fees."},{q:"What documents?",a:"Passport, CV, education docs."},{q:"Employment vs self-employment?",a:"Employee under contract. Self-employed as entrepreneur. We help choose."},{q:"Housing?",a:"We help search. Some employers provide housing."}],
+nl:[{q:"Moet ik betalen?",a:"Voorwaarden individueel besproken. Geen verborgen kosten."},{q:"Welke documenten?",a:"Paspoort, CV, opleidingsdocumenten."},{q:"Loondienst vs zelfstandige?",a:"Werknemer onder contract. Zelfstandige als ondernemer."},{q:"Huisvesting?",a:"Wij helpen zoeken."}],
+fr:[{q:"Dois-je payer ?",a:"Conditions discutées individuellement. Aucun frais caché."},{q:"Quels documents ?",a:"Passeport, CV, diplômes."},{q:"Salarié vs indépendant ?",a:"Salarié sous contrat. Indépendant comme entrepreneur."},{q:"Logement ?",a:"Nous aidons à chercher."}]
 };
-
-let currentLang='uk';
-function setLang(l){
-  currentLang=l;
-  document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[l]&&T[l][k])e.textContent=T[l][k]});
-  document.querySelectorAll('[data-ph]').forEach(e=>{const k=e.getAttribute('data-ph');if(T[l]&&T[l][k])e.placeholder=T[l][k]});
-  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.textContent.trim()==={uk:'UA',en:'EN',nl:'NL',fr:'FR'}[l])});
-  buildSectors(l);buildFAQ(l);
-}
-function buildSectors(l){document.getElementById('sectorTags').innerHTML=sectors[l].map((s,i)=>'<span class="sector-tag">'+sI[i]+' '+s+'</span>').join('')}
-function buildFAQ(l){document.getElementById('faqList').innerHTML=faqs[l].map(i=>'<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">'+i.q+'<span class="tgl">+</span></button><div class="faq-a">'+i.a+'</div></div>').join('')}
-function toggleFaq(b){const o=b.classList.contains('open');document.querySelectorAll('.faq-q').forEach(q=>q.classList.remove('open'));document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('open'));if(!o){b.classList.add('open');b.nextElementSibling.classList.add('open')}}
+let cL='uk';
+function setLang(l){cL=l;document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[l]?.[k])e.textContent=T[l][k]});document.querySelectorAll('[data-ph]').forEach(e=>{const k=e.getAttribute('data-ph');if(T[l]?.[k])e.placeholder=T[l][k]});document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.textContent.trim()==={uk:'UA',en:'EN',nl:'NL',fr:'FR'}[l])});bS(l);bF(l)}
+function bS(l){document.getElementById('sectorTags').innerHTML=sectors[l].map((s,i)=>'<span class="sector-tag">'+sI[i]+' '+s+'</span>').join('')}
+function bF(l){document.getElementById('faqList').innerHTML=faqs[l].map(i=>'<div class="faq-item"><button class="faq-q" onclick="tF(this)">'+i.q+'<span class="tgl">+</span></button><div class="faq-a">'+i.a+'</div></div>').join('')}
+function tF(b){const o=b.classList.contains('open');document.querySelectorAll('.faq-q').forEach(q=>q.classList.remove('open'));document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('open'));if(!o){b.classList.add('open');b.nextElementSibling.classList.add('open')}}
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
 document.querySelectorAll('.nav-link').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
-function submitForm(){document.getElementById('contactForm').style.display='none';const s=document.getElementById('formSuccess');s.style.display='block';s.textContent=T[currentLang]['contact.success']}
-
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.sr').forEach(e=>obs.observe(e));
-
-buildSectors('uk');buildFAQ('uk');
+bS('uk');bF('uk');
 </script>
 </body>
 </html>
