@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<!-- Подключение стилей для карты Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -112,6 +114,32 @@ a{color:inherit;text-decoration:none}
 .sr{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
 .sr.vis{opacity:1;transform:translateY(0)}
 .sr-d1{transition-delay:.1s}.sr-d2{transition-delay:.2s}.sr-d3{transition-delay:.25s}.sr-d4{transition-delay:.3s}
+
+/* СТИЛИ ДЛЯ КАРТЫ */
+#map {
+    height: 450px;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+    z-index: 1; /* Чтобы не перекрывало навигацию */
+    background-color: #e5e5e5;
+}
+.leaflet-popup-content-wrapper {
+    background: var(--bg-darker);
+    color: var(--white);
+    border-radius: 8px;
+}
+.leaflet-popup-tip {
+    background: var(--bg-darker);
+}
+.custom-pin {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.custom-pin:hover {
+    transform: scale(1.2);
+}
+
 @media(max-width:768px){
   .menu-btn{display:block}
   .nav-links{display:none;flex-direction:column}.nav-links.open{display:flex}
@@ -157,6 +185,7 @@ a{color:inherit;text-decoration:none}
   <div class="nav-links" id="navLinks">
     <a class="nav-link" href="#home" data-i18n="nav.home">Головна</a>
     <a class="nav-link" href="#about" data-i18n="nav.about">Про нас</a>
+    <a class="nav-link" href="#map-section" data-i18n="nav.map">Карта вакансій</a>
     <a class="nav-link" href="#services" data-i18n="nav.services">Послуги</a>
     <a class="nav-link" href="#process" data-i18n="nav.process">Як це працює</a>
     <a class="nav-link" href="#faq" data-i18n="nav.faq">FAQ</a>
@@ -184,10 +213,19 @@ a{color:inherit;text-decoration:none}
 <div class="wrap">
   <p class="body-text sr" data-i18n="about.text1">Robota Belgium — компанія у сфері працевлаштування, зареєстрована в Бельгії, що спеціалізується на формуванні команди висококваліфікованих спеціалістів для роботи в Бельгії. Ми пропонуємо унікальні можливості, які дозволяють нашим клієнтам отримати роботу у легальній бельгійській компанії з достойною оплатою. Крім того, ми надаємо повний спектр послуг з оформлення статусу підприємця в Бельгії та забезпечуємо бухгалтерське супроводження для зручності наших клієнтів.</p>
   <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;justify-content:center" class="sr">
-    <a href="#contact" class="btn-pill btn-green" data-i18n="cta.vacancy">Вакансії →</a>
+    <a href="#map-section" class="btn-pill btn-green" data-i18n="cta.vacancy">Вакансії →</a>
     <a href="https://docs.google.com/forms/d/1cQseTreeTuTtPbL4mNibFzoX5Yaz_Kq1CspR96-pri4/viewform" target="_blank" class="btn-pill btn-green" style="gap:8px" data-i18n="cta.form">Заповнити форму ☺</a>
     <a href="https://t.me/robotabelgium_info" target="_blank" class="btn-pill btn-dark" data-i18n="cta.write">Написати нам</a>
   </div>
+</div>
+</section>
+
+<!-- MAP SECTION (MOVED UP) -->
+<section class="section section-dark" id="map-section">
+<div class="wrap">
+  <h2 class="section-title sr" data-i18n="map.title">Наші вакансії</h2>
+  <div class="section-line sr"></div>
+  <div class="sr" id="map"></div>
 </div>
 </section>
 
@@ -213,7 +251,7 @@ a{color:inherit;text-decoration:none}
 <!-- PROCESS -->
 <section class="section section-gray" id="process">
 <div class="wrap">
-  <h2 class="section-title sr" data-i18n="process.title">Як це працює</h2>
+  <h2 class="section-title sr" data-i18n="process.title" style="color:var(--white);">Як це працює</h2>
   <div class="section-line sr"></div>
   <div class="process-row">
     <div class="step sr sr-d1"><div class="step-num">01</div><h3 data-i18n="process.s1t">Заявка</h3><p data-i18n="process.s1d">Заповніть форму або зв'яжіться з нами.</p></div>
@@ -243,7 +281,7 @@ a{color:inherit;text-decoration:none}
 <!-- FAQ -->
 <section class="section section-gray" id="faq">
 <div class="wrap">
-  <h2 class="section-title sr" data-i18n="faq.title">Часті питання</h2>
+  <h2 class="section-title sr" data-i18n="faq.title" style="color:var(--white);">Часті питання</h2>
   <div class="section-line sr"></div>
   <div class="faq-list sr" id="faqList"></div>
 </div>
@@ -283,13 +321,16 @@ a{color:inherit;text-decoration:none}
 </div>
 </footer>
 
+<!-- Подключение логики Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
 const T={
-uk:{"brand":"Робота Бельгія","nav.home":"Головна","nav.about":"Про нас","nav.services":"Послуги","nav.process":"Як це працює","nav.faq":"FAQ","nav.contact":"Контакти","hero.line1":"Формуємо команду","hero.line2":"спеціалістів","hero.line3":"у Бельгії","hero.cta":"Заповнити форму","about.text1":"Robota Belgium — компанія у сфері працевлаштування, зареєстрована в Бельгії, що спеціалізується на формуванні команди висококваліфікованих спеціалістів для роботи в Бельгії. Ми пропонуємо унікальні можливості, які дозволяють нашим клієнтам отримати роботу у легальній бельгійській компанії з достойною оплатою. Крім того, ми надаємо повний спектр послуг з оформлення статусу підприємця в Бельгії та забезпечуємо бухгалтерське супроводження для зручності наших клієнтів.","cta.vacancy":"Вакансії →","cta.form":"Заповнити форму ☺","cta.write":"Написати нам","services.title":"Наші послуги","services.s1t":"Підбір вакансій","services.s1d":"Підбираємо позиції відповідно до вашої кваліфікації, досвіду та побажань. Працюємо з перевіреними бельгійськими роботодавцями.","services.s2t":"Оформлення документів","services.s2d":"Допомога з робочим дозволом, реєстрацією в комуні, соціальним страхуванням та відкриттям банківського рахунку.","services.s3t":"Статус самозайнятого","services.s3d":"Для досвідчених спеціалістів — допомога з реєстрацією як zelfstandige (indépendant) з бухгалтерським супроводом.","services.s4t":"Адаптація та підтримка","services.s4d":"Консультації з питань житла, транспорту, мовних курсів та інтеграції в бельгійське суспільство.","process.title":"Як це працює","process.s1t":"Заявка","process.s1d":"Заповніть форму або зв'яжіться з нами.","process.s2t":"Підбір","process.s2d":"Підбираємо вакансії та узгоджуємо умови.","process.s3t":"Документи","process.s3d":"Оформлюємо документи для легальної роботи.","process.s4t":"Старт","process.s4d":"Допомагаємо з переїздом та адаптацією.","sectors.title":"Сектори","faq.title":"Часті питання","contact.title":"Зв'яжіться з нами","contact.desc":"Заповніть форму і ми зв'яжемося з вами найближчим часом","contact.fill":"Заповнити форму","contact.or":"Або напишіть нам напряму","footer.rights":"Усі права захищені","footer.privacy":"Політика конфіденційності","footer.terms":"Умови використання","footer.disclaimer":"Цей сайт не є гарантією працевлаштування. Всі умови фіксуються в індивідуальному договорі.","cta.title":"Готові почати?","cta.sub":"Заповніть форму — ми зв'яжемося протягом 2 робочих днів"},
-ru:{"brand":"Работа Бельгия","nav.home":"Главная","nav.about":"О нас","nav.services":"Услуги","nav.process":"Как это работает","nav.faq":"FAQ","nav.contact":"Контакты","hero.line1":"Формируем команду","hero.line2":"специалистов","hero.line3":"в Бельгии","hero.cta":"Заполнить форму","about.text1":"Robota Belgium — компания в сфере трудоустройства, зарегистрированная в Бельгии, которая специализируется на формировании команды высококвалифицированных специалистов для работы в Бельгии. Мы предлагаем уникальные возможности, позволяющие нашим клиентам получить работу в легальной бельгийской компании с достойной оплатой. Кроме того, мы предоставляем полный спектр услуг по оформлению статуса предпринимателя в Бельгии и обеспечиваем бухгалтерское сопровождение для удобства наших клиентов.","cta.vacancy":"Вакансии →","cta.form":"Заполнить форму ☺","cta.write":"Написать нам","services.title":"Наши услуги","services.s1t":"Подбор вакансий","services.s1d":"Подбираем позиции в соответствии с вашей квалификацией, опытом и пожеланиями. Работаем с проверенными бельгийскими работодателями.","services.s2t":"Оформление документов","services.s2d":"Помощь с разрешением на работу, регистрацией в коммуне, социальным страхованием и открытием банковского счёта.","services.s3t":"Статус самозанятого","services.s3d":"Для опытных специалистов — помощь с регистрацией как zelfstandige (indépendant) с бухгалтерским сопровождением.","services.s4t":"Адаптация и поддержка","services.s4d":"Консультации по вопросам жилья, транспорта, языковых курсов и интеграции в бельгийское общество.","process.title":"Как это работает","process.s1t":"Заявка","process.s1d":"Заполните форму или свяжитесь с нами.","process.s2t":"Подбор","process.s2d":"Подбираем вакансии и согласовываем условия.","process.s3t":"Документы","process.s3d":"Оформляем документы для легальной работы.","process.s4t":"Старт","process.s4d":"Помогаем с переездом и адаптацией.","sectors.title":"Секторы","faq.title":"Частые вопросы","contact.title":"Свяжитесь с нами","contact.desc":"Заполните форму и мы свяжемся с вами в ближайшее время","contact.fill":"Заполнить форму","contact.or":"Или напишите нам напрямую","footer.rights":"Все права защищены","footer.privacy":"Политика конфиденциальности","footer.terms":"Условия использования","footer.disclaimer":"Данный сайт не является гарантией трудоустройства. Все условия фиксируются в индивидуальном договоре.","cta.title":"Готовы начать?","cta.sub":"Заполните форму — мы свяжемся в течение 2 рабочих дней"},
-en:{"brand":"Robota Belgium","nav.home":"Home","nav.about":"About","nav.services":"Services","nav.process":"How it works","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Building a team","hero.line2":"of specialists","hero.line3":"in Belgium","hero.cta":"Apply Now","about.text1":"Robota Belgium is an employment services company registered in Belgium, specializing in building teams of qualified specialists. We offer legal employment with Belgian companies at competitive rates, plus full support for entrepreneur status registration and accounting.","cta.vacancy":"Vacancies →","cta.form":"Apply ☺","cta.write":"Write to us","services.title":"Our Services","services.s1t":"Job Matching","services.s1d":"Positions matching your qualifications. Verified Belgian employers.","services.s2t":"Documents","services.s2d":"Work permits, commune registration, social insurance, bank account.","services.s3t":"Self-Employment","services.s3d":"Registration as zelfstandige (indépendant) with accounting.","services.s4t":"Adaptation","services.s4d":"Housing, transport, language courses, integration.","process.title":"How It Works","process.s1t":"Apply","process.s1d":"Fill out the form or contact us.","process.s2t":"Match","process.s2d":"We find vacancies and negotiate.","process.s3t":"Documents","process.s3d":"We handle all paperwork.","process.s4t":"Start","process.s4d":"We help with relocation.","sectors.title":"Sectors","faq.title":"FAQ","contact.title":"Contact Us","contact.desc":"Fill out the form and we'll get back to you soon","contact.fill":"Fill out the form","contact.or":"Or write to us directly","footer.rights":"All rights reserved","footer.privacy":"Privacy","footer.terms":"Terms","footer.disclaimer":"Not a guarantee of employment.","cta.title":"Ready?","cta.sub":"Apply now — we reply within 2 days"},
-nl:{"brand":"Robota Belgium","nav.home":"Home","nav.about":"Over ons","nav.services":"Diensten","nav.process":"Werkwijze","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Wij bouwen","hero.line2":"een team","hero.line3":"in België","hero.cta":"Solliciteer","about.text1":"Robota Belgium is een in België geregistreerd bedrijf voor arbeidsbemiddeling dat teams van gekwalificeerde specialisten samenstelt. Legale tewerkstelling bij Belgische bedrijven, plus registratie als zelfstandige met boekhouding.","cta.vacancy":"Vacatures →","cta.form":"Solliciteer ☺","cta.write":"Schrijf ons","services.title":"Diensten","services.s1t":"Vacatures","services.s1d":"Functies bij geverifieerde werkgevers.","services.s2t":"Documenten","services.s2d":"Werkvergunning, gemeente, verzekering, bankrekening.","services.s3t":"Zelfstandige","services.s3d":"Registratie als zelfstandige met boekhouding.","services.s4t":"Aanpassing","services.s4d":"Huisvesting, vervoer, taalcursussen.","process.title":"Werkwijze","process.s1t":"Aanvraag","process.s1d":"Vul het formulier in.","process.s2t":"Matching","process.s2d":"Wij zoeken vacatures.","process.s3t":"Documenten","process.s3d":"Wij regelen het papierwerk.","process.s4t":"Start","process.s4d":"Wij helpen bij verhuizing.","sectors.title":"Sectoren","faq.title":"FAQ","contact.title":"Contact","contact.desc":"Vul het formulier in, wij nemen snel contact op","contact.fill":"Formulier invullen","contact.or":"Of schrijf ons rechtstreeks","footer.rights":"Alle rechten","footer.privacy":"Privacy","footer.terms":"Voorwaarden","footer.disclaimer":"Geen garantie voor tewerkstelling.","cta.title":"Klaar?","cta.sub":"Solliciteer — reactie binnen 2 dagen"},
-fr:{"brand":"Robota Belgium","nav.home":"Accueil","nav.about":"À propos","nav.services":"Services","nav.process":"Processus","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Nous formons","hero.line2":"une équipe","hero.line3":"en Belgique","hero.cta":"Postuler","about.text1":"Robota Belgium est une société de services en emploi enregistrée en Belgique, spécialisée dans la constitution d'équipes de spécialistes qualifiés. Emploi légal, inscription comme indépendant, suivi comptable.","cta.vacancy":"Postes →","cta.form":"Postuler ☺","cta.write":"Nous écrire","services.title":"Services","services.s1t":"Postes","services.s1d":"Postes chez des employeurs vérifiés.","services.s2t":"Documents","services.s2d":"Permis, commune, assurance, compte bancaire.","services.s3t":"Indépendant","services.s3d":"Inscription comme indépendant avec comptabilité.","services.s4t":"Adaptation","services.s4d":"Logement, transport, langue.","process.title":"Processus","process.s1t":"Candidature","process.s1d":"Remplissez le formulaire.","process.s2t":"Sélection","process.s2d":"Nous cherchons des postes.","process.s3t":"Documents","process.s3d":"Nous gérons les formalités.","process.s4t":"Début","process.s4d":"Aide au déménagement.","sectors.title":"Secteurs","faq.title":"FAQ","contact.title":"Contact","contact.desc":"Remplissez le formulaire, nous vous répondons rapidement","contact.fill":"Remplir le formulaire","contact.or":"Ou écrivez-nous directement","footer.rights":"Tous droits réservés","footer.privacy":"Confidentialité","footer.terms":"Conditions","footer.disclaimer":"Pas une garantie d'emploi.","cta.title":"Prêt ?","cta.sub":"Postulez — réponse sous 2 jours"}
+uk:{"brand":"Робота Бельгія","nav.home":"Головна","nav.about":"Про нас","nav.services":"Послуги","nav.process":"Як це працює","nav.map":"Карта вакансій","nav.faq":"FAQ","nav.contact":"Контакти","hero.line1":"Формуємо команду","hero.line2":"спеціалістів","hero.line3":"у Бельгії","hero.cta":"Заповнити форму","about.text1":"Robota Belgium — компанія у сфері працевлаштування, зареєстрована в Бельгії, що спеціалізується на формуванні команди висококваліфікованих спеціалістів для роботи в Бельгії. Ми пропонуємо унікальні можливості, які дозволяють нашим клієнтам отримати роботу у легальній бельгійській компанії з достойною оплатою. Крім того, ми надаємо повний спектр послуг з оформлення статусу підприємця в Бельгії та забезпечуємо бухгалтерське супроводження для зручності наших клієнтів.","cta.vacancy":"Вакансії →","cta.form":"Заповнити форму ☺","cta.write":"Написати нам","services.title":"Наші послуги","services.s1t":"Підбір вакансій","services.s1d":"Підбираємо позиції відповідно до вашої кваліфікації, досвіду та побажань. Працюємо з перевіреними бельгійськими роботодавцями.","services.s2t":"Оформлення документів","services.s2d":"Допомога з робочим дозволом, реєстрацією в комуні, соціальним страхуванням та відкриттям банківського рахунку.","services.s3t":"Статус самозайнятого","services.s3d":"Для досвідчених спеціалістів — допомога з реєстрацією як zelfstandige (indépendant) з бухгалтерським супроводом.","services.s4t":"Адаптація та підтримка","services.s4d":"Консультації з питань житла, транспорту, мовних курсів та інтеграції в бельгійське суспільство.","process.title":"Як це працює","process.s1t":"Заявка","process.s1d":"Заповніть форму або зв'яжіться з нами.","process.s2t":"Підбір","process.s2d":"Підбираємо вакансії та узгоджуємо умови.","process.s3t":"Документи","process.s3d":"Оформлюємо документи для легальної роботи.","process.s4t":"Старт","process.s4d":"Допомагаємо з переїздом та адаптацією.","map.title":"Наші вакансії","sectors.title":"Сектори","faq.title":"Часті питання","contact.title":"Зв'яжіться з нами","contact.desc":"Заповніть форму і ми зв'яжемося з вами найближчим часом","contact.fill":"Заповнити форму","contact.or":"Або напишіть нам напряму","footer.rights":"Усі права захищені","footer.privacy":"Політика конфіденційності","footer.terms":"Умови використання","footer.disclaimer":"Цей сайт не є гарантією працевлаштування. Всі умови фіксуються в індивідуальному договорі.","cta.title":"Готові почати?","cta.sub":"Заповніть форму — ми зв'яжемося протягом 2 робочих днів"},
+ru:{"brand":"Работа Бельгия","nav.home":"Главная","nav.about":"О нас","nav.services":"Услуги","nav.process":"Как это работает","nav.map":"Карта вакансий","nav.faq":"FAQ","nav.contact":"Контакты","hero.line1":"Формируем команду","hero.line2":"специалистов","hero.line3":"в Бельгии","hero.cta":"Заполнить форму","about.text1":"Robota Belgium — компания в сфере трудоустройства, зарегистрированная в Бельгии, которая специализируется на формировании команды высококвалифицированных специалистов для работы в Бельгии. Мы предлагаем уникальные возможности, позволяющие нашим клиентам получить работу в легальной бельгийской компании с достойной оплатой. Кроме того, мы предоставляем полный спектр услуг по оформлению статуса предпринимателя в Бельгии и обеспечиваем бухгалтерское сопровождение для удобства наших клиентов.","cta.vacancy":"Вакансии →","cta.form":"Заполнить форму ☺","cta.write":"Написать нам","services.title":"Наши услуги","services.s1t":"Подбор вакансий","services.s1d":"Подбираем позиции в соответствии с вашей квалификацией, опытом и пожеланиями. Работаем с проверенными бельгийскими работодателями.","services.s2t":"Оформление документов","services.s2d":"Помощь с разрешением на работу, регистрацией в коммуне, социальным страхованием и открытием банковского счёта.","services.s3t":"Статус самозанятого","services.s3d":"Для опытных специалистов — помощь с регистрацией как zelfstandige (indépendant) с бухгалтерским сопровождением.","services.s4t":"Адаптация и поддержка","services.s4d":"Консультации по вопросам жилья, транспорта, языковых курсов и интеграции в бельгийское общество.","process.title":"Как это работает","process.s1t":"Заявка","process.s1d":"Заполните форму или свяжитесь с нами.","process.s2t":"Подбор","process.s2d":"Подбираем вакансии и согласовываем условия.","process.s3t":"Документы","process.s3d":"Оформляем документы для легальной работы.","process.s4t":"Старт","process.s4d":"Помогаем с переездом и адаптацией.","map.title":"Наши вакансии","sectors.title":"Секторы","faq.title":"Частые вопросы","contact.title":"Свяжитесь с нами","contact.desc":"Заполните форму и мы свяжемся с вами в ближайшее время","contact.fill":"Заполнить форму","contact.or":"Или напишите нам напрямую","footer.rights":"Все права защищены","footer.privacy":"Политика конфиденциальности","footer.terms":"Условия использования","footer.disclaimer":"Данный сайт не является гарантией трудоустройства. Все условия фиксируются в индивидуальном договоре.","cta.title":"Готовы начать?","cta.sub":"Заполните форму — мы свяжемся в течение 2 рабочих дней"},
+en:{"brand":"Robota Belgium","nav.home":"Home","nav.about":"About","nav.services":"Services","nav.process":"How it works","nav.map":"Job Map","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Building a team","hero.line2":"of specialists","hero.line3":"in Belgium","hero.cta":"Apply Now","about.text1":"Robota Belgium is an employment services company registered in Belgium, specializing in building teams of qualified specialists. We offer legal employment with Belgian companies at competitive rates, plus full support for entrepreneur status registration and accounting.","cta.vacancy":"Vacancies →","cta.form":"Apply ☺","cta.write":"Write to us","services.title":"Our Services","services.s1t":"Job Matching","services.s1d":"Positions matching your qualifications. Verified Belgian employers.","services.s2t":"Documents","services.s2d":"Work permits, commune registration, social insurance, bank account.","services.s3t":"Self-Employment","services.s3d":"Registration as zelfstandige (indépendant) with accounting.","services.s4t":"Adaptation","services.s4d":"Housing, transport, language courses, integration.","process.title":"How It Works","process.s1t":"Apply","process.s1d":"Fill out the form or contact us.","process.s2t":"Match","process.s2d":"We find vacancies and negotiate.","process.s3t":"Documents","process.s3d":"We handle all paperwork.","process.s4t":"Start","process.s4d":"We help with relocation.","map.title":"Our Vacancies","sectors.title":"Sectors","faq.title":"FAQ","contact.title":"Contact Us","contact.desc":"Fill out the form and we'll get back to you soon","contact.fill":"Fill out the form","contact.or":"Or write to us directly","footer.rights":"All rights reserved","footer.privacy":"Privacy","footer.terms":"Terms","footer.disclaimer":"Not a guarantee of employment.","cta.title":"Ready?","cta.sub":"Apply now — we reply within 2 days"},
+nl:{"brand":"Robota Belgium","nav.home":"Home","nav.about":"Over ons","nav.services":"Diensten","nav.process":"Werkwijze","nav.map":"Vacaturekaart","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Wij bouwen","hero.line2":"een team","hero.line3":"in België","hero.cta":"Solliciteer","about.text1":"Robota Belgium is een in België geregistreerd bedrijf voor arbeidsbemiddeling dat teams van gekwalificeerde specialisten samenstelt. Legale tewerkstelling bij Belgische bedrijven, plus registratie als zelfstandige met boekhouding.","cta.vacancy":"Vacatures →","cta.form":"Solliciteer ☺","cta.write":"Schrijf ons","services.title":"Diensten","services.s1t":"Vacatures","services.s1d":"Functies bij geverifieerde werkgevers.","services.s2t":"Documenten","services.s2d":"Werkvergunning, gemeente, verzekering, bankrekening.","services.s3t":"Zelfstandige","services.s3d":"Registratie als zelfstandige met boekhouding.","services.s4t":"Aanpassing","services.s4d":"Huisvesting, vervoer, taalcursussen.","process.title":"Werkwijze","process.s1t":"Aanvraag","process.s1d":"Vul het formulier in.","process.s2t":"Matching","process.s2d":"Wij zoeken vacatures.","process.s3t":"Documenten","process.s3d":"Wij regelen het papierwerk.","process.s4t":"Start","process.s4d":"Wij helpen bij verhuizing.","map.title":"Onze vacatures","sectors.title":"Sectoren","faq.title":"FAQ","contact.title":"Contact","contact.desc":"Vul het formulier in, wij nemen snel contact op","contact.fill":"Formulier invullen","contact.or":"Of schrijf ons rechtstreeks","footer.rights":"Alle rechten","footer.privacy":"Privacy","footer.terms":"Voorwaarden","footer.disclaimer":"Geen garantie voor tewerkstelling.","cta.title":"Klaar?","cta.sub":"Solliciteer — reactie binnen 2 dagen"},
+fr:{"brand":"Robota Belgium","nav.home":"Accueil","nav.about":"À propos","nav.services":"Services","nav.process":"Processus","nav.map":"Carte des emplois","nav.faq":"FAQ","nav.contact":"Contact","hero.line1":"Nous formons","hero.line2":"une équipe","hero.line3":"en Belgique","hero.cta":"Postuler","about.text1":"Robota Belgium est une société de services en emploi enregistrée en Belgique, spécialisée dans la constitution d'équipes de spécialistes qualifiés. Emploi légal, inscription comme indépendant, suivi comptable.","cta.vacancy":"Postes →","cta.form":"Postuler ☺","cta.write":"Nous écrire","services.title":"Services","services.s1t":"Postes","services.s1d":"Postes chez des employeurs vérifiés.","services.s2t":"Documents","services.s2d":"Permis, commune, assurance, compte bancaire.","services.s3t":"Indépendant","services.s3d":"Inscription comme indépendant avec comptabilité.","services.s4t":"Adaptation","services.s4d":"Logement, transport, langue.","process.title":"Processus","process.s1t":"Candidature","process.s1d":"Remplissez le formulaire.","process.s2t":"Sélection","process.s2d":"Nous cherchons des postes.","process.s3t":"Documents","process.s3d":"Nous gérons les formalités.","process.s4t":"Début","process.s4d":"Aide au déménagement.","map.title":"Nos offres d'emploi","sectors.title":"Secteurs","faq.title":"FAQ","contact.title":"Contact","contact.desc":"Remplissez le formulaire, nous vous répondons rapidement","contact.fill":"Remplir le formulaire","contact.or":"Ou écrivez-nous directement","footer.rights":"Tous droits réservés","footer.privacy":"Confidentialité","footer.terms":"Conditions","footer.disclaimer":"Pas une garantie d'emploi.","cta.title":"Prêt ?","cta.sub":"Postulez — réponse sous 2 jours"}
 };
 const sectors={uk:["Будівництво","Логістика","Виробництво","Сільське господарство","Прибирання","HoReCa","Транспорт","Тех. обслуговування"],ru:["Строительство","Логистика","Производство","Сельское хозяйство","Уборка","HoReCa","Транспорт","Тех. обслуживание"],en:["Construction","Logistics","Manufacturing","Agriculture","Cleaning","HoReCa","Transport","Maintenance"],nl:["Bouw","Logistiek","Productie","Landbouw","Schoonmaak","HoReCa","Transport","Onderhoud"],fr:["Construction","Logistique","Production","Agriculture","Nettoyage","HoReCa","Transport","Maintenance"]};
 const sI=["🏗️","📦","🏭","🌾","🧹","🍽️","🚛","🔧"];
@@ -310,6 +351,44 @@ document.querySelectorAll('.nav-link').forEach(a=>a.addEventListener('click',()=
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.sr').forEach(e=>obs.observe(e));
 bS('uk');bF('uk');
+
+/* Инициализация карты Leaflet */
+document.addEventListener('DOMContentLoaded', function() {
+    var map = L.map('map', {
+        scrollWheelZoom: false // Отключаем случайный зум при прокрутке
+    }).setView([50.8503, 4.3517], 8); 
+
+    // Заменил темный слой на стандартную светлую карту OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+    }).addTo(map);
+
+    var customIcon = L.divIcon({
+        className: 'custom-pin',
+        html: '<div style="background-color: var(--green); width: 22px; height: 22px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 8px rgba(0,0,0,0.8);"></div>',
+        iconSize: [22, 22],
+        iconAnchor: [11, 11],
+        popupAnchor: [0, -11]
+    });
+
+    // Массив вакансий (координаты, название, ссылка на Telegram)
+    var vacancies = [
+        { lat: 51.2194, lng: 4.4025, title: "Будівельник (Антверпен)", link: "https://t.me/robotabelgium_info" },
+        { lat: 50.8503, lng: 4.3517, title: "Водій категорії СЕ (Брюссель)", link: "https://t.me/robotabelgium_info" },
+        { lat: 51.0543, lng: 3.7174, title: "Працівник складу (Гент)", link: "https://t.me/robotabelgium_info" },
+        { lat: 50.9329, lng: 4.3644, title: "Оператор на завод (Грімберген)", link: "https://t.me/robotabelgium_info" }
+    ];
+
+    // Добавление маркеров на карту
+    vacancies.forEach(function(v) {
+        var marker = L.marker([v.lat, v.lng], {icon: customIcon}).addTo(map);
+        marker.bindTooltip(v.title, {direction: 'top', offset: [0, -10]});
+        marker.on('click', function() {
+            window.open(v.link, '_blank');
+        });
+    });
+});
 </script>
 </body>
 </html>
