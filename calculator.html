@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robota Belgium — Калькулятор зарплати</title>
+<meta name="description" content="Калькулятор зарплати Брутто-Нетто в Бельгії.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* БАЗОВЫЕ СТИЛИ САЙТА */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#4d4d4d;--bg-dark:#3a3a3a;--bg-darker:#333;--bg-footer:#2e2e2e;
+  --green:#5a7a3a;--green-light:#6b8e4e;--green-hover:#7da05a;
+  --white:#fff;--text:#e8e8e8;--text-dim:#bbb;--text-dark:#999;
+  --tg:#28a8ea;--wa:#25d366;--fb:#1877f2;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Open Sans',sans-serif;color:var(--text);line-height:1.7;background:var(--bg);display:flex;flex-direction:column;min-height:100vh;}
+h1,h2,.brand{font-family:'DM Serif Display',serif}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+.nav{background:var(--bg-dark);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-size:26px;font-weight:400;color:var(--white);letter-spacing:.5px}
+.nav-right{display:flex;align-items:center;gap:10px}
+.social-icons{display:flex;gap:6px}
+.social-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);transition:transform .2s}
+.social-icon:hover{transform:scale(1.12)}
+.social-icon.tg{background:var(--tg)}.social-icon.fb{background:var(--fb)}
+.social-icon.ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.social-icon.tt{background:#111}.social-icon.vb{background:#7360f2}
+.lang-bar{display:flex;gap:3px}
+.lang-btn{padding:4px 9px;border-radius:4px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--text-dark);cursor:pointer;font-size:12px;font-family:'Open Sans',sans-serif;transition:all .2s}
+.lang-btn.active{background:var(--green);color:var(--white);border-color:var(--green)}
+.menu-btn{display:none;background:none;border:none;color:var(--white);font-size:24px;cursor:pointer;margin-left:6px}
+.nav-links{display:flex;gap:0;background:var(--bg-darker)}
+.nav-link{color:var(--text-dim);font-size:13px;padding:10px 14px;transition:color .2s;cursor:pointer;border:none;background:none;font-family:'Open Sans',sans-serif}
+.nav-link:hover{color:var(--white)}
+.footer{background:var(--bg-footer);padding:24px 28px;text-align:center;border-top:1px solid rgba(255,255,255,.04);margin-top:auto;}
+.footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:10px}
+.footer-links span{font-size:12px;color:var(--text-dark);cursor:pointer;transition:color .2s}
+.footer-links span:hover{color:var(--green-light)}
+.footer-copy{font-size:13px;color:var(--text-dark)}
+.footer-disc{font-size:11px;color:#555;margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto}
+
+@media(max-width:768px){
+  .menu-btn{display:block}
+  .nav-links{display:none;flex-direction:column}.nav-links.open{display:flex}
+}
+@media(max-width:480px){
+  .social-icons{display:none}
+}
+
+/* СТИЛИ КАЛЬКУЛЯТОРА */
+.calc-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    flex-grow: 1;
+}
+.calc-container {
+    background: #ffffff;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+.calc-container h2 {
+    color: var(--green);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    font-family: 'DM Serif Display', serif;
+}
+.calc-container .form-group {
+    margin-bottom: 16px;
+}
+.calc-container label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+}
+.calc-container input[type="number"], .calc-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+    color: #334155;
+}
+.calc-container input[type="number"]:focus, .calc-container select:focus {
+    border-color: var(--green);
+}
+.calc-container .radio-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 4px;
+}
+.calc-container .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: normal;
+    cursor: pointer;
+}
+.calc-container .results-box {
+    background-color: #f1f5f9;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 24px;
+}
+.calc-container .result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+}
+.calc-container .result-row:last-of-type {
+    border-bottom: none;
+}
+.calc-container .result-row.total {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--green);
+    border-top: 2px solid #e2e8f0;
+    padding-top: 12px;
+    margin-top: 8px;
+}
+.calc-container .minus {
+    color: #b91c1c;
+}
+.calc-container .disclaimer {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 16px;
+    line-height: 1.4;
+    text-align: justify;
+}
+</style>
+</head>
+<body>
+
+<!-- НАВИГАЦИЯ -->
+<nav class="nav">
+<div class="wrap">
+  <div class="nav-inner">
+    <div class="brand" data-i18n="brand">Робота Бельгія</div>
+    <div class="nav-right">
+      <div class="social-icons">
+        <a class="social-icon tg" href="https://t.me/robotabelgium_info" target="_blank" title="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M11.944 0A12 12 0 1 0 24 12.056 12.013 12.013 0 0 0 11.944 0Zm4.962 7.166c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.064-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635Z"/></svg></a>
+        <a class="social-icon ig" href="https://www.instagram.com/robotabelgium.info" target="_blank" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+      </div>
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a class="nav-link" href="index.html#home" data-i18n="nav.home">Головна</a>
+    <a class="nav-link" href="index.html#about" data-i18n="nav.about">Про нас</a>
+    <a class="nav-link" href="index.html#services" data-i18n="nav.services">Послуги</a>
+    <a class="nav-link" href="calculator.html">Калькулятор зарплати</a>
+  </div>
+</div>
+</nav>
+
+<!-- БЛОК КАЛЬКУЛЯТОРА -->
+<div class="calc-page-wrapper">
+    <div class="calc-container">
+        <h2>Калькулятор зарплати</h2>
+        
+        <div class="form-group">
+            <label for="grossInput">Місячна брутто-зарплата (€)</label>
+            <input type="number" id="grossInput" value="3000" min="0" step="50">
+        </div>
+
+        <div class="form-group">
+            <label>Статус працівника</label>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" name="status" value="white" checked onchange="calculateNet()"> Службовець (Bediende)
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="status" value="blue" onchange="calculateNet()"> Робітник (Arbeider)
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="childrenInput">Діти на утриманні</label>
+            <input type="number" id="childrenInput" value="0" min="0" max="10" oninput="calculateNet()">
+        </div>
+
+        <div class="results-box">
+            <div class="result-row">
+                <span>Брутто-зарплата:</span>
+                <span id="resGross">0.00 €</span>
+            </div>
+            <div class="result-row">
+                <span>Внесок до соцстраху (RSZ):</span>
+                <span id="resRsz" class="minus">0.00 €</span>
+            </div>
+            <div class="result-row">
+                <span>Оподатковуваний дохід:</span>
+                <span id="resTaxable" style="font-weight: 600;">0.00 €</span>
+            </div>
+            <div class="result-row">
+                <span>Професійний податок (Bedrijfsvoorheffing):</span>
+                <span id="resTax" class="minus">0.00 €</span>
+            </div>
+            <div class="result-row total">
+                <span>Чиста зарплата (Нетто):</span>
+                <span id="resNet">0.00 €</span>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            *Увага: Цей розрахунок є спрощеною симуляцією. Реальна сума нетто залежить від точних шкал авансового податку (bedrijfsvoorheffing), податку конкретної комуни, а також індивідуальних сімейних обставин і додаткових бонусів.
+        </div>
+    </div>
+</div>
+
+<!-- ПОДВАЛ -->
+<footer class="footer">
+<div class="wrap">
+  <div class="footer-copy">©<script>document.write(new Date().getFullYear())</script> by Robota Belgium.Info. Усі права захищені.</div>
+</div>
+</footer>
+
+<script>
+    function toggleMenu(){document.getElementById('navLinks').classList.toggle('open')}
+    document.querySelectorAll('.nav-link').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+    function calculateNet() {
+        const gross = parseFloat(document.getElementById('grossInput').value) || 0;
+        const isWhiteCollar = document.querySelector('input[name="status"]:checked').value === 'white';
+        const children = parseInt(document.getElementById('childrenInput').value) || 0;
+
+        let rszBasis = isWhiteCollar ? gross : gross * 1.08;
+        let rsz = rszBasis * 0.1307;
+
+        let taxable = gross - rsz;
+        if (taxable < 0) taxable = 0;
+
+        let baseTax = 0;
+        if (taxable > 3500) { baseTax = 850 + (taxable - 3500) * 0.50; } 
+        else if (taxable > 2000) { baseTax = 250 + (taxable - 2000) * 0.40; } 
+        else if (taxable > 1000) { baseTax = (taxable - 1000) * 0.25; } 
+        else { baseTax = 0; }
+
+        let finalTax = baseTax - (children * 40);
+        if (finalTax < 0) finalTax = 0;
+
+        let net = taxable - finalTax;
+        if (net < 0) net = 0;
+
+        document.getElementById('resGross').innerText = formatCurrency(gross);
+        document.getElementById('resRsz').innerText = `- ${formatCurrency(rsz)}`;
+        document.getElementById('resTaxable').innerText = formatCurrency(taxable);
+        document.getElementById('resTax').innerText = `- ${formatCurrency(finalTax)}`;
+        document.getElementById('resNet').innerText = formatCurrency(net);
+    }
+
+    function formatCurrency(value) {
+        return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' €';
+    }
+
+    document.getElementById('grossInput').addEventListener('input', calculateNet);
+    calculateNet();
+</script>
+</body>
+</html>
