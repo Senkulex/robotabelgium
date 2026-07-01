@@ -109,6 +109,7 @@ a{color:inherit;text-decoration:none}
 
 /* MAP */
 #map{height:450px;width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08);z-index:1;background:#e5e5e5}
+@media(max-width:600px){#map{height:320px;border-radius:8px}}
 .leaflet-popup-content-wrapper{background:var(--bg-darker);color:var(--white);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.4)}
 .leaflet-popup-tip{background:var(--bg-darker)}
 .leaflet-popup-content{margin:12px 16px;font-family:'Open Sans',sans-serif}
@@ -338,16 +339,18 @@ var mapInstance=null;
 function initMap(){
   if(mapInstance){mapInstance.remove();mapInstance=null}
   var el=document.getElementById('map');if(!el)return;
-  mapInstance=L.map('map',{scrollWheelZoom:false}).setView([50.90,4.40],10);
+  mapInstance=L.map('map',{scrollWheelZoom:false,tap:true,touchZoom:true}).setView([50.90,4.40],10);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(mapInstance);
-  var icon=L.divIcon({className:'',html:'<div style="background:#c0392b;width:20px;height:20px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 8px rgba(0,0,0,.6);cursor:pointer"></div>',iconSize:[20,20],iconAnchor:[10,10],popupAnchor:[0,-14]});
-  if(typeof VACANCIES!=='undefined'){
+  // Fix mobile render bug — invalidate after short delay
+  setTimeout(function(){mapInstance.invalidateSize();},300);
+  var icon=L.divIcon({className:'',html:'<div style="background:#c0392b;width:22px;height:22px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 8px rgba(0,0,0,.6);cursor:pointer"></div>',iconSize:[22,22],iconAnchor:[11,11],popupAnchor:[0,-14]});
+  if(typeof VACANCIES!=='undefined'&&VACANCIES.length>0){
     VACANCIES.forEach(function(v){
       var title=v.title[cL]||v.title.uk||'';
       var popupQ=T[cL]?.['popup.q']||'Перейти?';
       var popupBtn=T[cL]?.['popup.btn']||'TELEGRAM';
       var html='<div class="popup-title">'+title+'</div>'+(v.city?'<div style="font-size:12px;color:#aaa;margin-bottom:4px">📍 '+v.city+'</div>':'')+(v.salary?'<div class="popup-salary">'+v.salary+'</div>':'')+'<div class="popup-q">'+popupQ+'</div><a href="'+v.link+'" target="_blank" class="popup-btn">'+popupBtn+' →</a>';
-      L.marker([v.lat,v.lng],{icon:icon}).addTo(mapInstance).bindPopup(html,{closeButton:true,maxWidth:220});
+      L.marker([v.lat,v.lng],{icon:icon}).addTo(mapInstance).bindPopup(html,{closeButton:true,maxWidth:240});
     });
   }
 }
